@@ -1,0 +1,76 @@
+package:
+  name: qt6-qtquick3d
+  version: "6.9.2"
+  epoch: 0
+  description: qtquick3d
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - qt6-qtbase-dev
+      - libxkbcommon-dev
+      - libglvnd-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtshadertools-dev
+      - qt6-qtquicktimeline-dev
+      - clang
+      - vulkan-headers
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtquick3d
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: c0e283245d524cde9be26ac8db1621b50e6833ab
+      recurse-submodules: true
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DCMAKE_C_COMPILER=clang \
+        -DCMAKE_CXX_COMPILER=clang++ \
+        -DCMAKE_CXX_FLAGS="-g1 -flto=auto" \
+        -DCMAKE_C_FLAGS="-g1 -flto=auto"
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtquick3d
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
+
