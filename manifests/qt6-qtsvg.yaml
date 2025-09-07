@@ -1,0 +1,59 @@
+package:
+  name: qt6-qtsvg
+  version: "6.9.2"
+  epoch: 0
+  description: qtsvg
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtsvg
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: 56928697e4c41050962d8b0966b7537c71497dfc
+
+  - uses: qt6/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtsvg
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
