@@ -1,0 +1,68 @@
+package:
+  name: qt6-qtdeclarative
+  version: "6.9.2"
+  epoch: 0
+  description: qt6-qtdeclarative
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - qt6-qtshadertools-dev
+      - mesa-dev
+      - python3-dev
+      - vulkan-headers
+      - vulkan-loader
+
+  environment:
+    GCC_SPEC_FILE: no-hardening.spec
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtdeclarative.git
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: b653aebb2175203d86199b1d320fd10f939df3fc
+
+  - uses: qt6/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtdeclarative
+    strip-prefix: v
+    use-tag: true
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
+
