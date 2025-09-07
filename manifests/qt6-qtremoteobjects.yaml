@@ -1,0 +1,64 @@
+package:
+  name: qt6-qtremoteobjects
+  version: "6.9.2"
+  epoch: 0
+  description: qtremoteobjects
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - qt6-qtconnectivity-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtwebsockets-dev
+      - vulkan-headers
+      - vulkan-loader
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtremoteobjects
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: 6e5eafb607b7cab278cae8b0b47a7c2a553623ef
+
+  - uses: qt6/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtremoteobjects
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
