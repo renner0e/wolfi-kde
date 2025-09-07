@@ -9,17 +9,15 @@ package:
 environment:
   contents:
     packages:
+      - assimp-dev
       - build-base
       - busybox
-      - cmake
-      - qt6-qtbase-dev
-      - libxkbcommon-dev
-      - libglvnd-dev
+      - openxr-dev
       - qt6-qtdeclarative-dev
-      - qt6-qtshadertools-dev
       - qt6-qtquicktimeline-dev
-      - clang
+      - qt6-qtshadertools-dev
       - vulkan-headers
+      - vulkan-loader
 
 var-transforms:
   - from: ${{package.version}}
@@ -35,13 +33,11 @@ pipeline:
       expected-commit: c0e283245d524cde9be26ac8db1621b50e6833ab
       recurse-submodules: true
 
-  - uses: cmake/configure
-    with:
-      opts: |
-        -DCMAKE_C_COMPILER=clang \
-        -DCMAKE_CXX_COMPILER=clang++ \
-        -DCMAKE_CXX_FLAGS="-g1 -flto=auto" \
-        -DCMAKE_C_FLAGS="-g1 -flto=auto"
+  - uses: qt6/configure
+#    with:
+#      opts: |
+#        -DFEATURE_system_assimp=ON \
+#        -DFEATURE_system_openxr=ON
 
   - uses: cmake/build
 

@@ -1,0 +1,60 @@
+package:
+  name: openxr
+  version: "1.1.51"
+  epoch: 0
+  description: Generated headers and sources for OpenXR loader. 
+  copyright:
+    - license: Apache-2.0
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - jsoncpp-dev
+      - jsoncpp-static
+      - libglvnd-dev
+      - libxrandr-dev
+      - libxxf86vm-dev
+      - python3-dev
+      - vulkan-headers
+      - vulkan-loader
+      - wayland-dev
+      - xorg-server-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/KhronosGroup/OpenXR-SDK-Source
+      tag: release-${{package.version}}
+      expected-commit: 8e88ff273617418f4675f8b5d51a883eeae6fe53
+
+  - uses: cmake/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: KhronosGroup/OpenXR-SDK-Source
+    use-tag: true
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
+
