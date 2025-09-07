@@ -1,0 +1,61 @@
+package:
+  name: qt6-qtsensors
+  version: "6.9.2"
+  epoch: 0
+  description: qtsensors
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - qt6-qtsvg-dev
+      - qt6-qtdeclarative-dev
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtsensors
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: 605c20999be935ffafee1830af15eaaf925246ee
+
+  - uses: qt6/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtsensors
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
