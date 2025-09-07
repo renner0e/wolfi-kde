@@ -1,0 +1,63 @@
+package:
+  name: assimp
+  version: "6.0.2"
+  epoch: 0
+  description: Open Asset Import Library (Assimp) is a library to import various well-known 3D model formats in a uniform manner.
+  copyright:
+    - license: BSD-3-Clause
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - zlib-dev
+      - minizip-ng-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/assimp/assimp
+      tag: v${{package.version}}
+      expected-commit: fb375dd8c0a032106a2122815fb18dffe0283721
+
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DCMAKE_BUILD_TYPE=MinSizeRel \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_LIBDIR=lib \
+        -DBUILD_SHARED_LIBS=True \
+        -DASSIMP_IGNORE_GIT_HASH=ON \
+        -DASSIMP_BUILD_ASSIMP_TOOLS=ON \
+        -DASSIMP_BUILD_MINIZIP=True \
+        -DASSIMP_BUILD_TESTS=OFF
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: assimp/assimp
+    use-tag: true
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
