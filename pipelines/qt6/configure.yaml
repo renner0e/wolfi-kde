@@ -42,6 +42,6 @@ pipeline:
         -DQT_FEATURE_wayland=ON \
         -DQT_FEATURE_vulkan=ON \
         -DQT_BUILD_EXAMPLES=OFF \
-        -DQT_INSTALL_EXAMPLES_SOURCES=OFF
+        -DQT_INSTALL_EXAMPLES_SOURCES=OFF \
         ${{inputs.opts}}
 
