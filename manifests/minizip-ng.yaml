@@ -1,0 +1,71 @@
+package:
+  name: minizip-ng
+  version: "4.0.10"
+  epoch: 0
+  description: assimp
+  copyright:
+    - license: BSD-3-Clause
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - openssl-dev
+      - zlib-dev
+      - bzip2-dev
+      - xz-dev
+      - zstd-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/zlib-ng/minizip-ng
+      tag: ${{package.version}}
+      expected-commit: f3ed731e27a97e30dffe076ed5e0537daae5c1bd
+
+
+  - uses: cmake/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+#  - runs: |
+#      export CC=clang
+#      export CXX=clang++
+#
+#      cmake -B build -G Ninja -Wno-dev \
+#        -DCMAKE_BUILD_TYPE=MinSizeRel \
+#        -DCMAKE_INSTALL_PREFIX=/usr \
+#        -DCMAKE_INSTALL_LIBDIR=lib \
+#        -DBUILD_SHARED_LIBS=True \
+#        -DASSIMP_IGNORE_GIT_HASH=ON \
+#        -DASSIMP_BUILD_ASSIMP_TOOLS=ON
+#
+#      cmake --build build
+#      DESTDIR="${{targets.destdir}}" cmake --install build
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: zlib-ng/minizip-ng
+    use-tag: true
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
