@@ -1,0 +1,8 @@
+x86_64/
+tmp/
+packages/
+.vscode/
+.cache/
+melange.rsa*
+output/
+bootable.img
