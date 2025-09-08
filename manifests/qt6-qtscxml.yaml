@@ -1,0 +1,61 @@
+package:
+  name: qt6-qtscxml
+  version: "6.9.2"
+  epoch: 0
+  description: qtscxml
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - qt6-qtdeclarative-dev
+      - vulkan-headers
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtscxml
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: dc7bdbd8a767e1c6cd5b1ae8ef6a15c4c37b2a2a
+
+  - uses: qt6/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtscxml
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
