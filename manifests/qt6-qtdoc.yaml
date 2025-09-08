@@ -1,0 +1,47 @@
+package:
+  name: qt6-qtdoc
+  version: "6.9.2"
+  epoch: 0
+  description: qtdoc
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - libglvnd-dev
+      - qt6-qtbase-dev
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtdoc
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: 924db889cae31287a1edae2813f125d89c8e0cf3
+
+  - uses: cmake/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtdoc
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
