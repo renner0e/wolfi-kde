@@ -62,16 +62,32 @@ qt:
   just build qt6-qtpositioning
   just build qt6-qtlocation
 
-
   just build qt6-qtnetworkauth
   just build qt6-qtlanguageserver
+
+  just build fdk-aac
+  just build ldacbt
+  just build libcamera
+  just build libcanberra
+  just build libfreeaptx
+  just build liblc3
+  just build cunit
+  just build libmysofa
+  just build serd
+  just build zix
+  just build sord
+  just build lv2
+  just build srantom
+  just build lilv
+  just build webrtc-audio-processing
+  just build pipewire
   just build qt6-qtmultimedia
+
   just build qt6-qtspeech
   just build qt6-qtcharts
   just build qt6-qtscxml
   just build qt6-qtdoc
   just build qt6-qtgraphs
-
 
   just build libvpx
   #just build qt6-qtwebengine
