@@ -94,6 +94,7 @@ qt:
   #just build qt6-qtwebengine
 
 kde:
+  just build extra-cmake-modules
   just build kf6-ki18n
   just build kf6-kcoreaddons
   just build kf6-kconfig
