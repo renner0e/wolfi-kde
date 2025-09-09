@@ -13,6 +13,7 @@ environment:
       - busybox
       - qt6-qtsvg-dev
       - qt6-qtdeclarative-dev
+      - vulkan-headers
 
 var-transforms:
   - from: ${{package.version}}
