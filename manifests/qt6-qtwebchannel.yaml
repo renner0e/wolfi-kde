@@ -1,0 +1,64 @@
+package:
+  name: qt6-qtwebchannel
+  version: "6.9.2"
+  epoch: 0
+  description: qtwebchannel
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - libglvnd-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtwebsockets-dev
+      - vulkan-headers
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtwebchannel
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: 526bfacd1e9c53d902040ffd6ba922d235c000d7
+
+  - uses: cmake/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtwebchannel
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
