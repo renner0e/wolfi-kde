@@ -46,7 +46,7 @@ qt:
   just build qt6-qtsensors
   just build qt6-qtconnectivity
   just build qt6-qtwebsockets
-  just buidl qt6-qtwebchannel
+  just build qt6-qtwebchannel
   just build qt6-qtremoteobjects
   just build qt6-qtquicktimeline
 
