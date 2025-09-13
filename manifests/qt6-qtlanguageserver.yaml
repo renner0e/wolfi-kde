@@ -1,0 +1,60 @@
+package:
+  name: qt6-qtlanguageserver
+  version: "6.9.2"
+  epoch: 0
+  description: qtlanguageserver
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - qt6-qtbase-dev
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtlanguageserver
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: 59a494c090bd7865c4fd940d9b888d291c6e74e9
+
+  - uses: cmake/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtlanguageserver
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+# TODO: This package only has licenses?
+#test:
+#  pipeline:
+#    - uses: test/tw/ldd-check
