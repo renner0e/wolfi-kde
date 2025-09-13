@@ -1,0 +1,69 @@
+package:
+  name: libvpx
+  version: "1.15.2"
+  epoch: 0
+  description: libvpx
+  copyright:
+    - license: BSD-3-Clause
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - diffutils
+      - nasm
+      - perl-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: d168454ecd099805c675d4a98c66f4891373302a
+      repository: https://github.com/webmproject/libvpx
+      tag: v${{package.version}}
+
+  - name: "configure libvpx"
+    runs: |
+      ./configure \
+          --prefix=/usr \
+          --libdir=/usr/lib \
+          --disable-install-srcs \
+          --disable-static \
+          --enable-libs \
+          --enable-multithread \
+          --enable-pic \
+          --enable-postproc \
+          --enable-runtime-cpu-detect \
+          --enable-shared \
+          --enable-temporal-denoising \
+          --enable-unit-tests \
+          --enable-vp8 \
+          --enable-vp9 \
+          --enable-vp9-highbitdepth \
+          --enable-vp9-postproc \
+          --enable-vp9-temporal-denoising \
+
+  - uses: autoconf/make
+
+  - uses: autoconf/make-install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: webmproject/libvpx
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
