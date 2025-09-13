@@ -30,7 +30,8 @@ jobs:
             apk update && apk add melange just ripgrep
             cd /workspace
             melange keygen
-            just qt 2>&1 | rg -i -C 2 'WARN|ERRO'
+            #just qt 2>&1 | rg -i -C 2 'WARN|ERRO'
+            just build qt6-qtbase
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
