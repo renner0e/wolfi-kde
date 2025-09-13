@@ -33,5 +33,6 @@ jobs:
             apk update && apk add melange just
             cd /workspace
             melange keygen
-            just qt
+            just qt 2>&1 | rg -i -C 10 'WARN|ERRO' | rg -v 'INFO'
+
 
