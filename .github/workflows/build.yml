@@ -27,7 +27,7 @@ jobs:
           image: cgr.dev/chainguard/wolfi-base
           options: --privileged -v ${{ github.workspace }}:/workspace
           run: |
-            apk update && apk add melange just
+            apk update && apk add melange just ripgrep
             cd /workspace
             melange keygen
             just qt 2>&1 | rg -i -C 10 'WARN|ERRO'
