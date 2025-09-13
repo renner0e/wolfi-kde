@@ -40,6 +40,7 @@ qt:
   just build qt6-qtbase
   just build qt6-qtshadertools
   just build qt6-qtdeclarative
+  just build qt6-qtimageformats
   just build qt6-qtwayland
   just build qt6-qttools
   just build qt6-qtsvg
