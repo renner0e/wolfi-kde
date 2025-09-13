@@ -29,5 +29,6 @@ jobs:
           run: |
             apk update && apk add melange just
             cd /workspace
+            melange keygen
             just build qt
 
