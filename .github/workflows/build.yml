@@ -8,21 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-just:
+  build-packages:
     runs-on: ubuntu-latest
-
-    container:
-      image: cgr.dev/chainguard/wolfi-base
-      options: --privileged
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-
-      - name: Install melange
-        run: |
-          apk update && apk add melange
-
 
       - name: Setup Just
         uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3
@@ -30,6 +21,15 @@ jobs:
       - name: Check Just Syntax
         uses: ublue-os/just-action@205c35468e90e4973e79ca37597be9cf242a5760
 
-      - name: Build QT Deps
-        run: |
-          just build qt
+      - name: Build Packages with melange
+        uses: addnab/docker-run-action@v3
+        with:
+          image: cgr.dev/chainguard/wolfi-base
+          options: --privileged
+          volumes: |
+            ${{ github.workspace }}:/workspace
+          run: |
+            apk update && apk add melange just
+            cd /workspace
+            just build qt
+
