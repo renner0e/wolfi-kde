@@ -25,27 +25,11 @@ pipeline:
       tag: ${{package.version}}
       expected-commit: f3ed731e27a97e30dffe076ed5e0537daae5c1bd
 
-
   - uses: cmake/configure
 
   - uses: cmake/build
 
   - uses: cmake/install
-
-#  - runs: |
-#      export CC=clang
-#      export CXX=clang++
-#
-#      cmake -B build -G Ninja -Wno-dev \
-#        -DCMAKE_BUILD_TYPE=MinSizeRel \
-#        -DCMAKE_INSTALL_PREFIX=/usr \
-#        -DCMAKE_INSTALL_LIBDIR=lib \
-#        -DBUILD_SHARED_LIBS=True \
-#        -DASSIMP_IGNORE_GIT_HASH=ON \
-#        -DASSIMP_BUILD_ASSIMP_TOOLS=ON
-#
-#      cmake --build build
-#      DESTDIR="${{targets.destdir}}" cmake --install build
 
   - uses: strip
 
