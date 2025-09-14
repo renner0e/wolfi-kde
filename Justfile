@@ -100,7 +100,7 @@ kde:
   #just build py3-pyside6
   #just build kf6-kcoreaddons
   just build kf6-kconfig
-  just build kf6-kguiaddons
+  #just build kf6-kguiaddons
   just build kf6-kcolorscheme
 
   just build libxmlb

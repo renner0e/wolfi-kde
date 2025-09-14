@@ -1,0 +1,64 @@
+package:
+  name: libraw
+  version: "0.21.4"
+  epoch: 0
+  description: libraw
+  copyright:
+    - license: CDDL-1.0 OR LGPL-2.1-only
+
+environment:
+  contents:
+    packages:
+      - autoconf
+      - automake
+      - build-base
+      - busybox
+      - jasper-dev
+      - lcms2-dev
+      - libjpeg-dev
+      - libtool
+      - m4
+      - pkgconf-dev
+      - zlib-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 9646d776c7c61976080a8f2be67928df0750493e
+      repository: https://github.com/LibRaw/LibRaw
+      tag: ${{package.version}}
+
+  - uses: autoconf/configure
+    with:
+      opts: |
+        --enable-jasper \
+        --enable-jpeg \
+        --enable-lcms \
+        --enable-openmp \
+        --enable-zlib \
+        --disable-static
+
+  - uses: autoconf/make
+
+  - uses: autoconf/make-install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: LibRaw/LibRaw
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check

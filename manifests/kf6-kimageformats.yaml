@@ -1,0 +1,70 @@
+package:
+  name: kf6-kimageformats
+  version: "6.18.0"
+  epoch: 0
+  description: KImageFormats
+  copyright:
+    - license: BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only) AND MIT
+
+environment:
+  contents:
+    packages:
+      - appstream-dev
+      - build-base
+      - busybox
+      - cmake
+      - cups-dev
+      - extra-cmake-modules
+      - kf6-karchive-dev
+      - libavif-dev
+      - libdeflate-dev
+      - libdeflate-static
+      - libglvnd-dev
+      - libheif-dev
+      - libjxl-dev
+      - libraw-dev
+      - openexr-dev
+      - openjpeg-dev
+      - openjpeg-dev
+      - openjpeg-tools
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - vulkan-headers
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 7858c4eeec712c59b3214386d7e5639cab636bba
+      repository: https://invent.kde.org/frameworks/kimageformats
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/ \
+        -DKIMAGEFORMATS_HEIF:BOOL=ON
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

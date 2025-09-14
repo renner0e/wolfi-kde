@@ -1,0 +1,95 @@
+package:
+  name: libjxl
+  version: "0.11.1"
+  epoch: 0
+  description: libjxl
+  copyright:
+    - license: BSD-3-Clause
+
+vars:
+  llvm-vers: 20
+
+environment:
+  contents:
+    packages:
+      - asciidoc
+      - benchmark-dev
+      - brotli-dev
+      - build-base
+      - busybox
+      - clang-${{vars.llvm-vers}}
+      - clang-${{vars.llvm-vers}}-extras
+      - cmake
+      - doxygen
+      - gdk-pixbuf-dev
+      - giflib-dev
+      - gtest-dev
+      - gtk-2.0-dev
+      - highway-dev
+      - lcms2-dev
+      - libjpeg-turbo-dev
+      - libpng-dev
+      - llvm-${{vars.llvm-vers}}
+      - llvm-${{vars.llvm-vers}}-dev
+      - openexr-dev
+      - py3-sphinx
+      - xdg-utils
+      - zlib-dev
+
+  environment:
+    CC: clang
+    CXX: clang++
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com//libjxl/libjxl
+      tag: v${{package.version}}
+      expected-commit: 794a5dcf0d54f9f0b20d288a12e87afb91d20dfc
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DJPEGXL_ENABLE_PLUGINS=ON \
+        -DJPEGXL_ENABLE_PLUGIN_GIMP210=OFF \
+        -DJPEGXL_ENABLE_BENCHMARK=OFF \
+        -DJPEGXL_ENABLE_COVERAGE=OFF \
+        -DJPEGXL_ENABLE_EXAMPLES=OFF \
+        -DJPEGXL_ENABLE_FUZZERS=OFF \
+        -DJPEGXL_ENABLE_SJPEG=OFF \
+        -DJPEGXL_ENABLE_SKCMS=OFF \
+        -DJPEGXL_ENABLE_VIEWERS=OFF \
+        -DJPEGXL_FORCE_SYSTEM_GTEST=ON \
+        -DJPEGXL_FORCE_SYSTEM_BROTLI=ON \
+        -DJPEGXL_FORCE_SYSTEM_HWY=ON \
+        -DJPEGXL_FORCE_SYSTEM_LCMS2=ON \
+        -DBUILD_TESTING=OFF
+
+  - uses: cmake/build
+    with:
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: libjxl/libjxl
+    use-tag: true
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf
