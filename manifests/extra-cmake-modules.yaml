@@ -1,0 +1,38 @@
+package:
+  name: extra-cmake-modules
+  version: "6.18.0"
+  epoch: 0
+  description: Extra modules and scripts for CMake
+  copyright:
+    - license: LicenseRef-Callaway-BSD
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: c2de62eaa58cd4b646bd3abc2330319e5dca16d0
+      repository: https://invent.kde.org/frameworks/extra-cmake-modules
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
