@@ -97,9 +97,22 @@ qt:
 kde:
   just build extra-cmake-modules
   just build kf6-ki18n
-  just build kf6-kcoreaddons
+  #just build py3-pyside6
+  #just build kf6-kcoreaddons
   just build kf6-kconfig
+  just build kf6-kguiaddons
   just build kf6-kcolorscheme
+
+  just build libxmlb
+  just build snowball
+  just build appstream
+  just build kf6-karchive
+
+  just build libraw
+  just build libjxl
+  just build kf6-kimageformats
+
+  just build kf6-ktexttemplate
 
 build-tree:
     echo "This will build all packages required for Wolfi Bootc"
