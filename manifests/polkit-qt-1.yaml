@@ -1,0 +1,59 @@
+package:
+  name: polkit-qt-1
+  version: "0.200.0"
+  epoch: 0
+  description: Qt wrapper around Polkit-1 client libraries
+
+  copyright:
+    - license: BSD-3-Clause AND GPL-2.0-or-later AND LGPL-2.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - libglvnd-dev
+      - polkit-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - vulkan-headers
+      - vulkan-loader
+      #TODO: optional Qt6WidgetsPrivate missing
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: aa1c6c414ec021fd32e30492c00bb13347e228db
+      repository: https://invent.kde.org/libraries/polkit-qt-1
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DQT_MAJOR_VERSION=6
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+
