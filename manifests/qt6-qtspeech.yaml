@@ -32,7 +32,7 @@ pipeline:
       expected-commit: 293dc229f2cd86b16fc486e4253725a943cadf83
 
 
-  - uses: cmake/configure
+  - uses: qt6/configure
 
   - uses: cmake/build
 

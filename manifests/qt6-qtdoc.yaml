@@ -11,7 +11,6 @@ environment:
     packages:
       - build-base
       - busybox
-      - cmake
       - libglvnd-dev
       - qt6-qtbase-dev
 
@@ -28,7 +27,7 @@ pipeline:
       tag: v${{vars.mangled-package-version}}
       expected-commit: 924db889cae31287a1edae2813f125d89c8e0cf3
 
-  - uses: cmake/configure
+  - uses: qt6/configure
 
   - uses: cmake/build
 
