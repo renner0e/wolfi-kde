@@ -10,6 +10,7 @@ environment:
   contents:
     packages:
       - build-base
+      - freetype-dev
       - gtk-2.0-dev
       - libsamplerate-dev
       - libsndfile-dev
@@ -28,7 +29,7 @@ pipeline:
 
   - uses: meson/configure
     with:
-      opts: |-
+      opts: |
         -Dtests=enabled \
         -Dplugins=enabled
 
