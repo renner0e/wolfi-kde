@@ -1,0 +1,62 @@
+package:
+  name: kf6-breeze-icons
+  version: "6.18.0"
+  epoch: 0
+  description: Breeze icon theme.
+  copyright:
+    - license: LGPL-2.0-or-later AND LGPL-2.1-or-later AND LGPL-3.0-or-later AND CC-BY-SA-4.0
+
+  environment:
+    runtime:
+      - hicolor-icon-theme
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - libglvnd-dev
+      - py3-lxml
+      - python3-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 640296c15419dddf9bbb5582f0c3019b7cc864aa
+      repository: https://invent.kde.org/frameworks/breeze-icons
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/tw/symlink-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/tw/symlink-check
+
