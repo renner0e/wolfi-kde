@@ -9,11 +9,9 @@ package:
 environment:
   contents:
     packages:
-      - appstream-dev
       - build-base
       - busybox
       - bzip2-dev
-      - cmake
       - extra-cmake-modules
       - libglvnd-dev
       - openssl-dev

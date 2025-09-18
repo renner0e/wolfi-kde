@@ -9,10 +9,8 @@ package:
 environment:
   contents:
     packages:
-      - appstream-dev
       - build-base
       - busybox
-      - cmake
       - extra-cmake-modules
       - libglvnd-dev
       - qt6-qtbase-dev

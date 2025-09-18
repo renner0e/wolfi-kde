@@ -9,10 +9,8 @@ package:
 environment:
   contents:
     packages:
-      - appstream-dev
       - build-base
       - busybox
-      - cmake
       - cups-dev
       - extra-cmake-modules
       - kf6-karchive-dev
