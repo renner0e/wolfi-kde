@@ -1,0 +1,58 @@
+package:
+  name: kf6-kdbusaddons
+  version: "6.18.0"
+  epoch: 0
+  description: KDBusAddons
+  copyright:
+    - license: CC0-1.0 AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-3.0-only
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - libglvnd-dev
+      - libxkbcommon-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qttools-dev
+      - vulkan-headers
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 9a6bcbe55b729c06634a3b2df4c6595389abdc6a
+      repository: https://invent.kde.org/frameworks/kdbusaddons
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/ \
+        -DWITH_X11=OFF
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+
