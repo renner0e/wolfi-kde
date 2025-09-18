@@ -42,6 +42,9 @@ subpackages:
     description: ${{package.name}} development libraries and headers
     pipeline:
       - uses: split/dev
+    dependencies:
+      runtime:
+        - plasma-wayland-protocols
     test:
       pipeline:
         - uses: test/tw/ldd-check
