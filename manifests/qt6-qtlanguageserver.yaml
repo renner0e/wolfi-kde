@@ -27,7 +27,7 @@ pipeline:
       tag: v${{vars.mangled-package-version}}
       expected-commit: 59a494c090bd7865c4fd940d9b888d291c6e74e9
 
-  - uses: cmake/configure
+  - uses: qt6/configure
 
   - uses: cmake/build
 

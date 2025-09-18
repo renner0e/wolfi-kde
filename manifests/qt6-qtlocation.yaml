@@ -11,9 +11,13 @@ environment:
     packages:
       - build-base
       - busybox
+      - libglvnd-dev
+      - libxkbcommon-dev
+      - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
       - qt6-qtpositioning-dev
       - qt6-qtshadertools-dev
+      - vulkan-headers
 
 var-transforms:
   - from: ${{package.version}}

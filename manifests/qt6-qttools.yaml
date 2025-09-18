@@ -11,6 +11,9 @@ environment:
     packages:
       - build-base
       - busybox
+      - libglvnd-dev
+      - libxkbcommon-dev
+      - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
       - vulkan-headers
       - vulkan-loader
@@ -28,7 +31,6 @@ pipeline:
       tag: v${{vars.mangled-package-version}}
       expected-commit: f117f860edcbe49a38275bfe35d3573614be6107
       recurse-submodules: true # we need qlitehtml
-
 
   - uses: qt6/configure
 

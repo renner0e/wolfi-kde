@@ -11,6 +11,9 @@ environment:
     packages:
       - build-base
       - busybox
+      - qt6-qtbase-dev
+      - libglvnd-dev
+      - libxkbcommon-dev
 
 var-transforms:
   - from: ${{package.version}}
@@ -26,6 +29,7 @@ pipeline:
       expected-commit: 86f4616dd1e0801d0b0a1b656a4648255028890d
       recurse-submodules: true
 
+    # TODO: system assimp
   - uses: qt6/configure
 
   - uses: cmake/build

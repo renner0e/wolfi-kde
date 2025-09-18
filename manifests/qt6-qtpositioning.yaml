@@ -11,6 +11,9 @@ environment:
     packages:
       - build-base
       - busybox
+      - libglvnd-dev
+      - libxkbcommon-dev
+      - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
 
 var-transforms:

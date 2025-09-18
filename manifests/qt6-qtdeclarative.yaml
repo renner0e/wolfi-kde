@@ -11,9 +11,13 @@ environment:
     packages:
       - build-base
       - busybox
-      - qt6-qtshadertools-dev
+      - libglvnd-dev
+      - libxkbcommon-dev
       - mesa-dev
       - python3-dev
+      - qt6-qtbase-dev
+      - qt6-qtshadertools-dev
+      - qt6-qtsvg-dev
       - vulkan-headers
       - vulkan-loader
 

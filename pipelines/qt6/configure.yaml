@@ -4,9 +4,6 @@ needs:
   packages:
     - cmake
     - ninja
-    - qt6-qtbase-dev #Qt6Config
-    - libxkbcommon-dev #Qt6Gui
-    - libglvnd-dev
 
 inputs:
   output-dir:

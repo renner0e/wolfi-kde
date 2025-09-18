@@ -11,6 +11,9 @@ environment:
     packages:
       - build-base
       - busybox
+      - qt6-qtbase-dev
+      - libglvnd-dev
+      - libxkbcommon-dev
       - qt6-qtsvg-dev
       - qt6-qtdeclarative-dev
       - vulkan-headers

@@ -11,9 +11,12 @@ environment:
     packages:
       - build-base
       - busybox
-      - wayland-dev
+      - libglvnd-dev
+      - libxkbcommon-dev
+      - qt6-qtbase-dev
       - vulkan-headers
       - vulkan-loader
+      - wayland-dev
 
 var-transforms:
   - from: ${{package.version}}

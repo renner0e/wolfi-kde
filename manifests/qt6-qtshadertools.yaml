@@ -11,6 +11,9 @@ environment:
     packages:
       - build-base
       - busybox
+      - qt6-qtbase-dev
+      - libxkbcommon-dev
+      - libglvnd-dev
 
 var-transforms:
   - from: ${{package.version}}
