@@ -1,7 +1,8 @@
 package:
   name: jsoncpp
   version: 1.9.6
-  epoch: 2
+  #TODO: undo this
+  epoch: 10
   description: "C++ library for parsing JSON"
   copyright:
     - license: 'CC-PDDC OR MIT'
