@@ -1,0 +1,62 @@
+package:
+  name: kf6-kguiaddons
+  version: "6.18.0"
+  epoch: 0
+  description: KGuiAddons
+  copyright:
+    - license: BSD-2-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-3.0-only
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - libglvnd-dev
+      - libxkbcommon-dev
+      - plasma-wayland-protocols-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtwayland-dev
+      - vulkan-headers
+      - wayland-dev
+      - wayland-protocols
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 719d16f877f1a5ea7c9806eebf275bff130e7182
+      repository: https://invent.kde.org/frameworks/kguiaddons
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/ \
+        -DWITH_X11=OFF \
+        -DBUILD_PYTHON_BINDINGS=OFF
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+
