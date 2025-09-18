@@ -1,0 +1,69 @@
+package:
+  name: kf6-kfilemetadata
+  version: "6.18.0"
+  epoch: 0
+  description: A library for extracting file metadata
+  copyright:
+    - license: BSD-3-Clause AND CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (LGPL-2.1-only OR LGPL-3.0-only)
+
+environment:
+  contents:
+    packages:
+      - attr-dev
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - ffmpeg-dev
+      - kf6-karchive-dev
+      - kf6-kcodecs-dev
+      - kf6-kconfig-dev
+      - kf6-kcoreaddons-dev
+      - kf6-ki18n-dev
+      - libglvnd-dev
+      - poppler-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - vulkan-headers
+      # TODO: package all this except appimages fuck them
+      #- catdoc, upstream is dead
+      #- extract
+      #- taglib
+      #- libexiv2
+      #-qmobipocket
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 22cbc5332ebddc5414aff0de93791806ff1c1af3
+      repository: https://invent.kde.org/frameworks/kfilemetadata
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+
