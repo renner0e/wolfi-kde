@@ -45,11 +45,3 @@ subpackages:
     dependencies:
       runtime:
         - plasma-wayland-protocols
-    test:
-      pipeline:
-        - uses: test/tw/ldd-check
-
-test:
-  pipeline:
-    - uses: test/tw/ldd-check
-
