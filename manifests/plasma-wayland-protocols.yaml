@@ -12,11 +12,7 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
-      - libglvnd-dev
-      - qt5-qtbase-dev
-      - qt6-qtbase-dev
       - wayland-dev
-      - wayland-protocols
 
 pipeline:
   - uses: git-checkout
