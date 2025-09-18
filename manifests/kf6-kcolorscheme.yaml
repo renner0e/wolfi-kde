@@ -13,10 +13,13 @@ environment:
       - busybox
       - extra-cmake-modules
       - kf6-kconfig-dev
+      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
       - libglvnd-dev
       - libxkbcommon-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
+      - vulkan-headers
 
 pipeline:
   - uses: git-checkout
