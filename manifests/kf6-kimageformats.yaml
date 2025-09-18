@@ -23,11 +23,11 @@ environment:
       - libraw-dev
       - openexr-dev
       - openjpeg-dev
-      - openjpeg-dev
       - openjpeg-tools
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
       - vulkan-headers
+      #TODO: libjxl complaints
 
 pipeline:
   - uses: git-checkout
@@ -40,7 +40,7 @@ pipeline:
     with:
       opts: |
         -DECM_DIR=/usr/share/ECM/ \
-        -DKIMAGEFORMATS_HEIF:BOOL=ON
+        -DKIMAGEFORMATS_HEIF=ON
 
   - uses: cmake/build
 
