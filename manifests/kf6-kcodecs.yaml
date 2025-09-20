@@ -1,0 +1,53 @@
+package:
+  name: kf6-kcodecs
+  version: "6.18.0"
+  epoch: 0
+  description: KCodecs provide a collection of methods to manipulate strings using various encodings
+  copyright:
+    - license: BSD-3-Clause AND CC0-1.0 AND GPL-2.0-or-later AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT AND MPL-1.1
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - qt6-qtbase-dev
+      - qt6-qttools-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 01fb7151df42e5b0fdf436cf3344aa66036a8cd6
+      repository: https://invent.kde.org/frameworks/kcodecs
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+
