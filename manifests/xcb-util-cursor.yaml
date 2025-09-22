@@ -1,0 +1,62 @@
+package:
+  name: xcb-util-cursor
+  version: "0.1.6"
+  epoch: 0
+  description: XCB port of libXcursor
+  copyright:
+    - license: MIT
+
+environment:
+  contents:
+    packages:
+      - autoconf
+      - automake
+      - build-base
+      - busybox
+      - gperf
+      - libtool
+      - libtool
+      - m4
+      - pkgconf-dev
+      - xcb-util-dev
+      - xcb-util-image-dev
+      - xcb-util-renderutil-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 7b0fa99aa13084a9bf7be4180066f6a74b0adef1
+      repository: https://gitlab.freedesktop.org/xorg/lib/libxcb-cursor
+      tag: ${{package.name}}-${{package.version}}
+      recurse-submodules: true
+
+  - uses: autoconf/configure
+    with:
+      opts: |
+        --with-pic \
+        --disable-static \
+        --disable-silent-rules
+
+  - uses: autoconf/make
+
+  - uses: autoconf/make-install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: ${{package.name}}
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check

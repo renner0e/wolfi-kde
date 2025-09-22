@@ -47,6 +47,9 @@ environment:
       - wayland-dev
       - wayland-protocols
       - wolfi-base
+      - xcb-util-cursor-dev
+      - xcb-util-keysyms-dev
+      - xcb-util-wm-dev
 
 var-transforms:
   - from: ${{package.version}}
@@ -62,6 +65,9 @@ pipeline:
       expected-commit: 6f0d27d2e4ba5fa6562f738aaaf8eaf98ebf51e7
 
   - uses: qt6/configure
+    with:
+      opts: |
+        -DQT_FEATURE_xcb=ON
 
   - uses: cmake/build
 
@@ -120,3 +126,4 @@ update:
 test:
   pipeline:
     - uses: test/tw/ldd-check
+

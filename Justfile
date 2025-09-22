@@ -37,6 +37,7 @@ build $package="":
         --runner "${MELANGE_RUNNER}"
 
 qt:
+  just build xcb-util-cursor # I do not want an xorg session, libplasma doesn't build without it
   just build qt6-qtbase # I do not want to have this, needs wayland and vulkan flags
   just build qt6-qtshadertools
   just build qt6-qtsvg
