@@ -1,0 +1,83 @@
+package:
+  name: libplasma
+  version: "6.4.90"
+  epoch: 0
+  description: Plasma library and runtime components
+  copyright:
+    - license: BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only) AND Qt-LGPL-exception-1.1
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - kf6-karchive-dev
+      - kf6-kbookmarks-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kcompletion-dev
+      - kf6-kconfig-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kglobalaccel-dev
+      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
+      - kf6-kiconthemes-dev
+      - kf6-kio-dev
+      - kf6-kirigami-dev
+      - kf6-kitemviews-dev
+      - kf6-kjobwidgets-dev
+      - kf6-knotifications-dev
+      - kf6-kpackage-dev
+      - kf6-kservice-dev
+      - kf6-ksvg-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+      - kf6-solid-dev
+      - libglvnd-dev
+      - libxkbcommon-dev
+      - plasma-activities-dev
+      - plasma-wayland-protocols-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtsvg-dev
+      - qt6-qttools-dev
+      - qt6-qtwayland-dev
+      - vulkan-headers
+      - wayland-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: dd22a456c013522859ee99a334aa7e881c910f29
+      repository: https://invent.kde.org/plasma/libplasma
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

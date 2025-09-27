@@ -1,38 +1,30 @@
 package:
-  name: kf6-kwindowsystem
-  version: "6.18.0"
+  name: plasma-activities-stats
+  version: "6.4.90"
   epoch: 0
-  description: KWindowSystem
+  description: A library for accessing the usage data collected by the activities system.
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: CC0-1.0, GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only)
 
 environment:
   contents:
     packages:
+      - boost-dev
       - build-base
       - busybox
       - extra-cmake-modules
+      - kf6-kconfig-dev
       - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
+      - plasma-activities-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
-      - qt6-qttools-dev
-      - qt6-qtwayland-dev
       - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: 368ea8bc7359f9d125acebaaab6327d13b96fa71
+      repository: https://invent.kde.org/plasma/plasma-activities-stats
       tag: v${{package.version}}
 
   - uses: cmake/configure

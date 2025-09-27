@@ -1,0 +1,76 @@
+package:
+  name: kf6-baloo
+  version: "6.18.0"
+  epoch: 0
+  description: Framework for searching and managing metadata.
+  copyright:
+    - license: BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only) AND bzip2-1.0.6
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - extra-cmake-modules
+      - kf6-kbookmarks-dev
+      - kf6-kcompletion-dev
+      - kf6-kconfig-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kcrash-dev
+      - kf6-kdbusaddons-dev
+      - kf6-kfilemetadata-dev
+      - kf6-ki18n-dev
+      - kf6-kidletime-dev
+      - kf6-kio-dev
+      - kf6-kitemviews-dev
+      - kf6-kjobwidgets-dev
+      - kf6-kservice-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+      - kf6-solid-dev
+      - libglvnd-dev
+      - libx11-dev
+      - lmdb-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qttools-dev
+      - vulkan-headers
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: cf4d41c8e2bd3f168541f87e3756b8f38bcedcc1
+      repository: https://invent.kde.org/frameworks/baloo
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

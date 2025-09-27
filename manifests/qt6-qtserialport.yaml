@@ -1,0 +1,64 @@
+package:
+  name: qt6-qtserialport
+  version: "6.9.2"
+  epoch: 0
+  description: Qt Serial Port Support
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - libglvnd-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - systemd-dev
+      - vulkan-headers
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtserialport
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: 0065f193698e984f8ab319f780f318a01265a9f6
+
+  - uses: qt6/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtserialport
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf

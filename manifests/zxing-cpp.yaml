@@ -1,0 +1,58 @@
+package:
+  name: zxing-cpp
+  version: "2.3.0"
+  epoch: 0
+  description: C++ port of ZXin
+  copyright:
+    - license: Apache-2.0 AND MIT
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - libglvnd-dev
+      - opencv-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtmultimedia-dev
+      - stb
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: d6068bcebeb8fd9f0d35a99b00d202be86a14dbe
+      repository: https://github.com/zxing-cpp/zxing-cpp
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DZXING_DEPENDENCIES=LOCAL \
+        -DZXING_PYTHON_MODULE=off
+
+
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  release-monitor:
+    identifier: 101246
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

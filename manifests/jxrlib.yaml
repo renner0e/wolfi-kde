@@ -1,0 +1,58 @@
+package:
+  name: jxrlib
+  version: "0.2.4"
+  epoch: 0
+  description: jxrlib
+  copyright:
+    - license: GPL
+
+vars:
+  llvm-vers: 20
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+
+
+  environment:
+    GCC_SPEC_FILE: no-hardening.spec
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/glencoesoftware/jxrlib
+      tag: v${{package.version}}
+      expected-commit: a8e7f81b8f13ef620049caddeb537b5ea5ecffda
+
+  - uses: cmake/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: glencoesoftware/jxrlib
+    use-tag: true
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf

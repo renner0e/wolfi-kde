@@ -1,0 +1,79 @@
+package:
+  name: libqalculate
+  version: "5.7.0"
+  epoch: 0
+  description: Library implementing a multi-purpose desktop calculator
+  copyright:
+    - license: GPL-2.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - curl-dev
+      - gettext-dev
+      - gmp-dev
+      - icu-dev
+      - intltool
+      - libtool
+      - libxml2-dev
+      - mpfr-dev
+      - pkgconf-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 97db5e178dbbeae3caf546bac8a1ca27746ff8c1
+      repository: https://github.com/Qalculate/libqalculate
+      tag: v${{package.version}}
+
+  - uses: autoconf/configure
+
+  - uses: autoconf/make
+
+  - uses: autoconf/make-install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: Qalculate/libqalculate
+    strip-prefix: v
+    use-tag: true
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    dependencies:
+      runtime:
+        - glib-dev
+        - libxml2-dev
+        - mpfr-dev
+
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+  - name: qalc
+    description: cli calculator
+    dependencies:
+      runtime:
+        - ${{package.name}}
+    pipeline:
+      - runs: |
+          mkdir -p ${{targets.subpkgdir}}/usr/bin
+          mv ${{targets.destdir}}/usr/bin/qalc ${{targets.subpkgdir}}/usr/bin
+
+    test:
+      pipeline:
+        - runs: |
+            qalc --version
+            qalc --help
+            qalc 6 feet to cm
+        - uses: test/tw/ldd-check
+

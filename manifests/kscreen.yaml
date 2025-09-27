@@ -1,0 +1,86 @@
+package:
+  name: kscreen
+  version: "6.4.90"
+  epoch: 0
+  description: KDE's screen management software
+  copyright:
+    - license: CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.0-or-later AND (GPL-2.0-only OR GPL-3.0-only)
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - extra-cmake-modules
+      - kf6-kcmutils-dev
+      - kf6-kcodecs-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kconfig-dev
+      - kf6-kconfigwidgets-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kcrash-dev
+      - kf6-kdbusaddons-dev
+      - kf6-ki18n-dev
+      - kf6-kimageformats-dev
+      - kf6-kpackage-dev
+      - kf6-ksvg-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+      - kf6-kxmlgui-dev
+      - layer-shell-qt-dev
+      - libglvnd-dev
+      - libkscreen-dev
+      - libplasma-dev
+      - libx11-dev
+      - libxi-dev
+      - libxkbcommon-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtwayland-dev
+      - vulkan-headers
+      - wayland-dev
+      - wayland-protocols
+      - xcb-util-dev
+
+  environment:
+    # TODO: report this upstream, HDR errors
+    GCC_SPEC_FILE: no-hardening.spec
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 6df60044e4a68a9c7ae18244f19045da73ec74ea
+      repository: https://invent.kde.org/plasma/kscreen
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - runs: |
+        kwin --version
+

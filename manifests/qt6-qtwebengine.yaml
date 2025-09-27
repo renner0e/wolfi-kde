@@ -1,0 +1,133 @@
+package:
+  name: qt6-qtwebengine
+  version: "6.9.2"
+  epoch: 0
+  description: qtwebengine
+  copyright:
+    - license: LGPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      # TODO: remove me
+      - apk-tools
+      - bison
+      - build-base
+      - busybox
+      - cmake
+      - dbus-dev
+      - flex
+      - fontconfig-dev
+      - glib-dev
+      - gperf
+      - harfbuzz-dev
+      - icu-dev
+      - libglvnd-dev
+      - libnss-dev
+      - libpng-dev
+      - libpng-dev
+      - libva-dev
+      - libvpx-dev
+      - opus-dev
+      - perl-dev
+      - py3-html5lib
+      - python3-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtshadertools-dev
+      - re2-dev
+      - tiff-dev
+      - py3-spdx-tools
+      - nodejs
+      - libxkbcommon-dev
+      - mesa-gbm
+      - mesa-dev
+      - libdrm-dev
+      - vulkan-headers
+      - vulkan-loader
+
+      - re2-dev
+      - ffmpeg-dev
+      - pipewire-dev
+      - egl-gbm-dev
+      - libepoxy-dev
+      - libevent-dev
+      - libxslt-dev
+      - pciutils-dev
+      - minizip-ng-dev
+      - pulseaudio-dev
+      - krb5-dev
+      - alsa-lib-dev
+
+  environment:
+    CFLAGS: "$CFLAGS -D_LARGEFILE64_SOURCE -Wno-builtin-macro-redefined -Wno-deprecated-declarations"
+    CXXFLAGS: "$CXXFLAGS -D_LARGEFILE64_SOURCE -Wno-builtin-macro-redefined -Wno-deprecated-declarations"
+
+var-transforms:
+  - from: ${{package.version}}
+    match: "_"
+    replace: "-"
+    to: mangled-package-version
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/qt/qtwebengine
+      tag: v${{vars.mangled-package-version}}
+      expected-commit: 997e3a38136b7cd69b9a79d5cd7a77448c9cfb33
+      recurse-submodules: true
+
+  - uses: qt6/configure
+    with:
+      opts: |
+        -DQT_FEATURE_webengine_kerberos=ON \
+        -DQT_FEATURE_webengine_proprietary_codecs=ON \
+        -DQT_FEATURE_webengine_system_alsa=ON \
+        -DQT_FEATURE_webengine_system_ffmpeg=ON \
+        -DQT_FEATURE_webengine_system_icu=ON \
+        -DQT_FEATURE_webengine_system_libevent=ON \
+        -DQT_FEATURE_webengine_system_libpci=ON \
+        -DQT_FEATURE_webengine_system_libpng=ON \
+        -DQT_FEATURE_webengine_system_libtiff=ON \
+        -DQT_FEATURE_webengine_system_libvpx=OFF \
+        -DQT_FEATURE_webengine_system_libwebp=ON \
+        -DQT_FEATURE_webengine_system_libxml=ON \
+        -DQT_FEATURE_webengine_system_minizip=ON \
+        -DQT_FEATURE_webengine_system_opus=ON \
+        -DQT_FEATURE_webengine_system_pulseaudio=ON \
+        -DQT_FEATURE_webengine_system_pulseaudio=ON \
+        -DQT_FEATURE_webengine_system_re2=ON \
+        -DQT_FEATURE_webengine_system_zlib=ON \
+        -DQT_FEATURE_webengine_webrtc_pipewire=ON \
+        -DQT_FEATURE_webengine_system_gbm=ON
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: qt/qtwebengine
+    use-tag: true
+    strip-prefix: v
+  ignore-regex-patterns:
+    - 'rc\d+$'
+    - 'beta\d+$'
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf

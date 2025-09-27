@@ -1,0 +1,83 @@
+package:
+  name: plasma-breeze
+  version: "6.4.90"
+  epoch: 0
+  description: Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
+  copyright:
+    - license: BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND MIT
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - extra-cmake-modules
+      - kdecoration-dev
+      - kf6-frameworkintegration-dev
+      - kf6-kcmutils-dev
+      - kf6-kcodecs-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kconfig-dev
+      - kf6-kconfigwidgets-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
+      - kf6-kiconthemes-dev
+      - kf6-kirigami-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+      - libglvnd-dev
+      - libx11-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtsvg-dev
+      - vulkan-headers
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 67f5908aae7fb59267a7ad3d64c912aeb3dac91e
+      repository: https://invent.kde.org/plasma/breeze
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/ \
+        -DBUILD_QT6=ON \
+        -DBUILD_QT5=OFF
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+  - name: breeze-cursor-theme
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+        - runs: |
+            mkdir -p ${{targets.subpkgdir}}/usr/share/icons/Breeze_Light/
+            mkdir -p ${{targets.subpkgdir}}/usr/share/icons/breeze_cursors/
+            cp -r cursors/Breeze_Light/Breeze_Light/* ${{targets.subpkgdir}}/usr/share/icons/Breeze_Light
+            cp -r cursors/Breeze/Breeze/* ${{targets.subpkgdir}}/usr/share/icons/Breeze_Light
+    test:
+      pipeline:
+        - uses: test/tw/symlink-check
+    
+

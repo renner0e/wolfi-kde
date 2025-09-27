@@ -1,0 +1,51 @@
+package:
+  name: egl-gbm
+  version: "1.1.2.1"
+  epoch: 0
+  description: The GBM EGL external platform library.
+  copyright:
+    - license: MIT
+
+environment:
+  contents:
+    packages:
+      - busybox
+      - build-base
+      - libdrm-dev
+      - mesa-dev
+      - mesa-gbm
+      - eglexternalplatform-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/NVIDIA/egl-gbm
+      tag: ${{package.version}}
+      expected-commit: b24587d4871a630d05e9e26da94c95e6ce4324f2
+
+  - uses: meson/configure
+
+  - uses: meson/compile
+
+  - uses: meson/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  release-monitor:
+    identifier: 369557
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/pkgconf
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check

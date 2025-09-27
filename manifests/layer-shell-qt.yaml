@@ -1,10 +1,10 @@
 package:
-  name: kf6-kwindowsystem
-  version: "6.18.0"
+  name: layer-shell-qt
+  version: "6.4.90"
   epoch: 0
-  description: KWindowSystem
+  description: Qt component to allow applications to make use of the Wayland wl-layer-shell protocol.
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: BSD-3-Clause AND CC0-1.0 AND LGPL-3.0-or-later AND MIT
 
 environment:
   contents:
@@ -14,25 +14,18 @@ environment:
       - extra-cmake-modules
       - libglvnd-dev
       - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
-      - qt6-qttools-dev
       - qt6-qtwayland-dev
       - vulkan-headers
       - wayland-dev
       - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: ebd64dd395aa91eef21716b9840a2fd72a6b246f
+      repository: https://invent.kde.org/plasma/layer-shell-qt
       tag: v${{package.version}}
 
   - uses: cmake/configure
@@ -59,8 +52,5 @@ subpackages:
     test:
       pipeline:
         - uses: test/tw/ldd-check
-
-test:
-  pipeline:
-    - uses: test/tw/ldd-check
+        - uses: test/pkgconf
 

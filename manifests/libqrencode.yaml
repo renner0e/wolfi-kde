@@ -1,0 +1,60 @@
+package:
+  name: libqrencode
+  version: "4.1.1"
+  epoch: 0
+  description: Library for encoding QR codes
+  copyright:
+    - license: LGPL-2.1-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - libtool
+      - m4
+      - pkgconf-dev
+      - libpng-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 715e29fd4cd71b6e452ae0f4e36d917b43122ce8
+      repository: https://github.com/fukuchi/libqrencode
+      tag: v${{package.version}}
+
+  - uses: autoconf/configure
+    with:
+      opts: |
+        --with-tests
+
+
+  - uses: autoconf/make
+
+  - uses: autoconf/make-install
+
+  - runs: |
+      make check
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: fukuchi/libqrencode
+    strip-prefix: v
+    use-tag: true
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

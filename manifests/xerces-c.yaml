@@ -1,0 +1,50 @@
+package:
+  name: xerces-c
+  version: "3.3.0"
+  epoch: 0
+  description:  Apache Xerces-C validating XML parser 
+  copyright:
+    - license: Apache-2.0
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://github.com/apache/xerces-c
+      tag: v${{package.version}}
+      expected-commit: 31b4b3a06105dcd607db9fda9d1883ad7e489bfe
+
+  - uses: cmake/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: apache/xerces-c
+    use-tag: true
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - uses: test/pkgconf

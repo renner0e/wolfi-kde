@@ -1,0 +1,157 @@
+package:
+  name: plasma-workspace
+  version: "6.4.90"
+  epoch: 0
+  description: 
+  copyright:
+    - license: 
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - extra-cmake-modules
+      - kf6-attica-dev
+      - kf6-karchive-dev
+      - kf6-kauth-dev
+      - kf6-kcmutils-dev
+      - kf6-kcodecs-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kconfig-dev
+      - kf6-kconfigwidgets-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kcrash-dev
+      - kf6-kdbusaddons-dev
+      - kf6-kdeclarative-dev
+      - kf6-kitemmodels-dev
+      - kf6-kwallet-dev
+      # TODO: slovenian fucks me over
+      #- kf6-kdoctools-dev
+      - cups-dev
+      - dbus-dev
+      - icu-dev
+      - iso-codes-dev
+      - kf6-baloo-dev
+      - kf6-kbookmarks-dev
+      - kf6-kcompletion-dev
+      - kf6-kded-dev
+      - kf6-kfilemetadata-dev
+      - kf6-kglobalaccel-dev
+      - kf6-kguiaddons-dev
+      - kf6-kholidays-dev
+      - kf6-ki18n-dev
+      - kf6-kiconthemes-dev
+      - kf6-kidletime-dev
+      - kf6-kio-dev
+      - kf6-kirigami-addons-dev
+      - kf6-kirigami-dev
+      - kf6-kitemviews-dev
+      - kf6-kjobwidgets-dev
+      - kf6-knewstuff-dev
+      - kf6-knotifications-dev
+      - kf6-knotifyconfig-dev
+      - kf6-kpackage-dev
+      - kf6-kparts-dev
+      - kf6-kquickcharts-dev
+      - kf6-krunner-dev
+      - kf6-kservice-dev
+      - kf6-kstatusnotifieritem-dev
+      - kf6-ksvg-dev
+      - kf6-ktexteditor-dev
+      - kf6-ktextwidgets-dev
+      - kf6-kunitconversion-dev
+      - kf6-kuserfeedback-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+      - kf6-kxmlgui-dev
+      - kf6-networkmanager-qt-dev
+      - kf6-prison-dev
+      - kf6-solid-dev
+      - kf6-sonnet-dev
+      - kf6-syntax-highlighting-dev
+      - knighttime-dev
+      - kscreen-dev
+      - kscreenlocker-dev
+      - kwayland-dev
+      - kwin-dev
+      - layer-shell-qt-dev
+      - libcanberra-dev
+      - libglvnd-dev
+      - libkexiv2-qt-dev
+      - libkscreen-dev
+      - libksysguard-dev
+      - libplasma-dev
+      - libqalculate-dev
+      - libxkbcommon-dev
+      - phonon-dev
+      - pipewire-dev
+      - plasma-activities-dev
+      - plasma-activities-stats-dev
+      - plasma-breeze-dev
+      - plasma-wayland-protocols-dev
+      - plasma5support-dev
+      - polkit-qt-1-dev
+      - qcoro-dev
+      - qt6-qt5compat-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtlocation-dev
+      - qt6-qtpositioning-dev
+      - qt6-qtshadertools-dev
+      - qt6-qtsvg-dev
+      - qt6-qtwayland-dev
+      - vulkan-headers
+      - wayland-dev
+      - xcb-util-dev
+      - xcb-util-image-dev
+      - zxing-cpp-dev
+      - libice-dev
+      # TODO: this was missing but cmake didn't complain
+      - kf6-kded-dev
+      - kf6-qqc2-desktop-style-dev
+      # For the applet tests
+      #- selenium
+      - xcb-util-cursor-dev
+
+  environment:
+    GCC_SPEC_FILE: no-hardening.spec
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: caf082bef34b164a8fb577f9b63dc1fbf02cc541
+      repository: https://invent.kde.org/plasma/plasma-workspace
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/ \
+        -DPLASMA_X11_DEFAULT_SESSION=OFF \
+        -DINSTALL_SDDM_WAYLAND_SESSION=ON \
+        -DWITH_X11=1 \
+        -DBUILD_TESTING=OFF \
+        -DPACKAGEKIT_OFFLINE_UPDATES=OFF
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+

@@ -1,10 +1,10 @@
 package:
-  name: kf6-kwindowsystem
+  name: kf6-kservice
   version: "6.18.0"
   epoch: 0
-  description: KWindowSystem
+  description: KService
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only) AND MIT
 
 environment:
   contents:
@@ -12,27 +12,18 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
-      - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
+      - kf6-kconfig-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kdoctools-dev
+      - kf6-ki18n-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
-      - qt6-qttools-dev
-      - qt6-qtwayland-dev
-      - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: 86558c46e2cfba2535b7bf72822dce45f7eb7be5
+      repository: https://invent.kde.org/frameworks/KService
       tag: v${{package.version}}
 
   - uses: cmake/configure

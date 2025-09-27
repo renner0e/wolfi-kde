@@ -1,10 +1,10 @@
 package:
-  name: kf6-kwindowsystem
+  name: kf6-attica
   version: "6.18.0"
   epoch: 0
-  description: KWindowSystem
+  description: Attica is a Qt library that implements the Open Collaboration Services API.
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: CC0-1.0 AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-3.0-only AND (LGPL-2.1-only OR LGPL-3.0-only).txt
 
 environment:
   contents:
@@ -12,27 +12,15 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
-      - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
-      - qt6-qtdeclarative-dev
-      - qt6-qttools-dev
-      - qt6-qtwayland-dev
+      - libglvnd-dev
       - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: 419dcdf17eb48f8f2b8c1a44dc67606fe4d8c6e4
+      repository: https://invent.kde.org/frameworks/attica
       tag: v${{package.version}}
 
   - uses: cmake/configure

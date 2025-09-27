@@ -1,0 +1,145 @@
+package:
+  name: plasma-desktop
+  version: "6.4.90"
+  epoch: 0
+  description: Plasma for the Desktop
+  copyright:
+    - license: BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only)
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - extra-cmake-modules
+#      - freetype-dev
+#      - hwdata-dev
+#      - hwdata-pnp
+#      - kdecoration-dev
+      - kf6-attica-dev
+      - kf6-kauth-dev
+      - kf6-kcmutils-dev
+      - kf6-kcodecs-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kconfig-dev
+      - kf6-kconfigwidgets-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kcrash-dev
+      - kf6-kdbusaddons-dev
+#      - kf6-kdeclarative-dev
+#      - kf6-kdoctools-dev
+      - kf6-kglobalaccel-dev
+      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
+#      - kf6-kidletime-dev
+#      - kf6-kirigami-dev
+      - kf6-knewstuff-dev
+      - kf6-kio-dev
+      - kf6-kpackage-dev
+#      - kf6-kservice-dev
+      - kf6-ksvg-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+      - kf6-kxmlgui-dev
+      - kf6-kiconthemes-dev
+#      - kglobalacceld-dev
+#      - kpipewire-dev
+#      - kwayland-dev
+#      - libcanberra-dev
+#      - libei-dev
+      - libglvnd-dev
+#      - libinput-dev
+#      - libxcvt-dev
+#      - plasma-activities-dev
+#      - plasma-wayland-protocols-dev
+      - qt6-qt5compat-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+#      - qt6-qtsensors-dev
+      - qt6-qtshadertools-dev
+      - qt6-qtsvg-dev
+#      - qt6-qttools-dev
+      - qt6-qtwayland-dev
+      - vulkan-headers
+      - wayland-dev
+      - wayland-protocols
+#      - wayland-protocols
+#      - libqaccessibilityclient-dev
+#      - libdisplay-info-dev
+      - kf6-knotifications-dev
+#      - pipewire-dev
+#      - knighttime-dev
+#      - kscreenlocker-dev
+#      - kscreen-dev
+      - kf6-krunner-dev
+      - libx11-dev
+      - kf6-kbookmarks-dev
+      - kf6-kcompletion-dev
+      - kf6-kitemviews-dev
+      - kf6-kitemmodels-dev
+      - kf6-sonnet-dev
+      - kf6-knotifyconfig-dev
+      - kf6-kjobwidgets-dev
+      - kf6-solid-dev
+      - kf6-kservice-dev
+      - plasma5support-dev
+      - libplasma-dev
+      - plasma-activities-dev
+      - plasma-activities-stats-dev
+      - kf6-kdoctools-dev
+      - kf6-kirigami-dev
+      - kf6-kirigami-addons-dev
+      - libwacom-dev
+      - libsdl2-dev
+      - plasma-workspace-dev
+      - kwin-dev
+      - kscreenlocker-dev
+      - plasma-workspace-dev
+      - kf6-qqc2-desktop-style-dev
+      - kaccounts-integration-dev
+      - libaccounts-qt-dev
+      - signond-dev
+      - plasma-workspace-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 25b01c8037ce3414f1d6653de9566809c405de68
+      repository: https://invent.kde.org/plasma/plasma-desktop
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/ \
+        -DBUILD_KCM_MOUSE_X11=OFF \
+        -DBUILD_KCM_TOUCHPAD_X11=OFF
+
+
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - runs: |
+        kwin --version
+

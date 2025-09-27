@@ -1,0 +1,85 @@
+package:
+  name: kf6-ktexteditor
+  version: "6.18.0"
+  epoch: 0
+  description: KTextEditor Framework
+  copyright:
+    - license: BSD-2-Clause AND CC0-1.0 AND LGPL-2.0-only AND LGPL-2.0-or-later AND MIT
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - kf6-karchive-dev
+      - kf6-kauth-dev
+      - kf6-kbookmarks-dev
+      - kf6-kcodecs-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kcompletion-dev
+      - kf6-kconfig-dev
+      - kf6-kconfigwidgets-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
+      - kf6-kio-dev
+      - kf6-kitemviews-dev
+      - kf6-kjobwidgets-dev
+      - kf6-kparts-dev
+      - kf6-kservice-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+      - kf6-kxmlgui-dev
+      - kf6-solid-dev
+      - kf6-sonnet-dev
+      - kf6-syntax-highlighting-dev
+      - libglvnd-dev
+      - libx11-dev
+      - libx11-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qtspeech-dev
+      - vulkan-headers
+      # TODO: missing cups and editorconfig
+      # https://github.com/editorconfig/editorconfig-core-c
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 1e516f2ca15c507a9854fb7515adaf8689af363e
+      repository: https://invent.kde.org/frameworks/ktexteditor
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    dependencies:
+        runtime:
+          - kf6-kparts
+          - kf6-syntax-highlighting
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

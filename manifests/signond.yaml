@@ -1,0 +1,66 @@
+package:
+  name: signond
+  version: "8.61"
+  epoch: 0
+  description: SignOn Daemon (Qt)
+  copyright:
+    - license: LGPL-2.1-only
+
+environment:
+  contents:
+    packages:
+      - build-base
+#      - busybox
+      - doxygen
+#      - graphviz-dev
+      - libglvnd-dev
+#      - glib-dev
+#      - libaccounts-glib-dev
+#      - qt5-qtbase-dev
+      - qt6-qtbase-dev
+      - qt6-qttools-dev
+      # TODO: split packge in qt and qt-devel -doc
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 5b34c5bbc45eedf55bf553675595b3fcb5c156a8
+      repository: https://gitlab.com/accounts-sso/signond
+      tag: VERSION_${{package.version}}
+
+  # Upstream doesn't have qt6 support yet
+  - uses: patch
+    with:
+      patches: 36.patch
+
+  - runs: |
+      qmake6 \
+      PREFIX=/usr \
+      LIBDIR=/usr/lib \
+      QMF_INSTALL_ROOT=/usr \
+      CONFIG+=release \
+      QMAKE_INCDIR=/usr/include/qt6
+
+      make
+      make install INSTALL_ROOT=${{targets.contextdir}}
+
+  - uses: strip
+
+update:
+  enabled: true
+  release-monitor:
+    identifier: 6530
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

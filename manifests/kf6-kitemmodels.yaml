@@ -1,38 +1,28 @@
 package:
-  name: kf6-kwindowsystem
+  name: kf6-kitemmodels
   version: "6.18.0"
   epoch: 0
-  description: KWindowSystem
+  description: KItemModels
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only) AND MIT
 
 environment:
   contents:
     packages:
       - build-base
       - busybox
+      - cmake
       - extra-cmake-modules
       - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
-      - qt6-qttools-dev
-      - qt6-qtwayland-dev
       - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: 18193e5860898500e4f45d3c3b80c86b4c8bc12f
+      repository: https://invent.kde.org/frameworks/kitemmodels
       tag: v${{package.version}}
 
   - uses: cmake/configure

@@ -20,10 +20,6 @@ pipeline:
       tag: v${{package.version}}
       expected-commit: e4b3efb449ccb994d39230eb6e8440d267471f4a
 
-  - uses: patch
-    with:
-      patches: sharedlib.patch
-
   - uses: autoconf/make
 
   - runs: |

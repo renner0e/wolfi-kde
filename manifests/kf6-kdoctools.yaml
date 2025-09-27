@@ -1,0 +1,67 @@
+package:
+  name: kf6-kdoctools
+  version: "6.18.0"
+  epoch: 0
+  description: KDocTools
+  copyright:
+    - license: BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only) AND MIT
+
+  dependencies:
+    runtime:
+      - docbook-xml
+      - libxml2-utils
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - extra-cmake-modules
+      - qt6-qtbase-dev
+      - kf6-karchive-dev
+      - kf6-ki18n-dev
+      - libxslt-dev
+      - libxml2-dev
+      - perl-dev
+      - perl-uri
+      - docbook-xml
+      - qt6-qttools-dev
+      # TODO: something weird with perl-uri
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 659e0116f754b00466c75a72477eb6c82ec7280f
+      repository: https://invent.kde.org/frameworks/kdoctools
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

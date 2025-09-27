@@ -1,10 +1,10 @@
 package:
-  name: kf6-kwindowsystem
+  name: kf6-kxmlgui
   version: "6.18.0"
   epoch: 0
-  description: KWindowSystem
+  description: KXMLGUI
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: BSD-2-Clause AND CC0-1.0 AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (LGPL-2.1-only OR LGPL-3.0-only)
 
 environment:
   contents:
@@ -12,33 +12,36 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
+      - kf6-kcodecs-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kconfig-dev
+      - kf6-kconfigwidgets-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kglobalaccel-dev
+      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
+      - kf6-kiconthemes-dev
+      - kf6-kitemviews-dev
+      - kf6-kwidgetsaddons-dev
       - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
       - qt6-qttools-dev
-      - qt6-qtwayland-dev
       - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
+      # whining about cups missing
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: fec4b97a608a74fac7e527a31694c0a2bb587555
+      repository: https://invent.kde.org/frameworks/kxmlgui
       tag: v${{package.version}}
 
   - uses: cmake/configure
     with:
       opts: |
-        -DECM_DIR=/usr/share/ECM/
+        -DECM_DIR=/usr/share/ECM/ \
+        -DBUILD_PYTHON_BINDINGS=OFF
 
   - uses: cmake/build
 

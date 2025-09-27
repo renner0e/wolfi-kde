@@ -1,0 +1,66 @@
+package:
+  name: libksysguard
+  version: "6.4.90"
+  epoch: 0
+  description: Library to retrieve information on the current status of computer hardware
+  copyright:
+    - license: BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-3.0-only AND LicenseRef-KDE-Accepted-GPL AND LicenseRef-KDE-Accepted-LGPL
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - kf6-attica-dev
+      - kf6-kauth-dev
+      - kf6-kconfig-dev
+      - kf6-kcoreaddons-dev
+      - kf6-ki18n-dev
+      - kf6-knewstuff-dev
+      - kf6-kpackage-dev
+      - kf6-kservice-dev
+      - kf6-solid-dev
+      - libcap-dev
+      - libdrm-dev
+      - libglvnd-dev
+      - libnl3-dev
+      - libpcap-dev
+      - lm-sensors-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - vulkan-headers
+      - zlib-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: dd1afa229dcef0934615b31072e28715795dd87c
+      repository: https://invent.kde.org/plasma/libksysguard
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf

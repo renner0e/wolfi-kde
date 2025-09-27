@@ -1,20 +1,21 @@
 package:
-  name: kf6-kwindowsystem
-  version: "6.18.0"
+  name: libkscreen
+  version: "6.4.90"
   epoch: 0
-  description: KWindowSystem
+  description: KDE's screen management software
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: GPL-2.0-or-later
 
 environment:
   contents:
     packages:
       - build-base
       - busybox
+      - cmake
       - extra-cmake-modules
       - libglvnd-dev
+      - libxcb-dev
       - libxkbcommon-dev
-      - plasma-wayland-protocols
       - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
@@ -22,17 +23,13 @@ environment:
       - qt6-qtwayland-dev
       - vulkan-headers
       - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
+
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: 21c96a3c7c8009923792986f2c9467e6b2d6b3c1
+      repository: https://invent.kde.org/plasma/libkscreen
       tag: v${{package.version}}
 
   - uses: cmake/configure
@@ -62,5 +59,6 @@ subpackages:
 
 test:
   pipeline:
-    - uses: test/tw/ldd-check
+    - runs: |
+        kwin --version
 

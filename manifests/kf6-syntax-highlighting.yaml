@@ -1,38 +1,31 @@
 package:
-  name: kf6-kwindowsystem
+  name: kf6-syntax-highlighting
   version: "6.18.0"
   epoch: 0
-  description: KWindowSystem
+  description: Syntax highlighting Engine for Structured Text and Code.
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only) AND MIT
 
 environment:
   contents:
     packages:
       - build-base
       - busybox
+      - cmake
       - extra-cmake-modules
       - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
+      - perl
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
       - qt6-qttools-dev
-      - qt6-qtwayland-dev
       - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
+      - xerces-c-dev
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: f39b8f4054efa48389765d82081854053d8cfd91
+      repository: https://invent.kde.org/frameworks/syntax-highlighting
       tag: v${{package.version}}
 
   - uses: cmake/configure

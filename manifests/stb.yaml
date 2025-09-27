@@ -1,0 +1,41 @@
+#nolint:valid-pipeline-git-checkout-tag
+package:
+  name: stb
+  version: "0_git20250907"
+  epoch: 0
+  description: Single-file public domain libraries for C/C++
+  copyright:
+    - license: MIT OR Unlicense
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - imagemagick-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: fede005abaf93d9d7f3a679d1999b2db341b360f
+      branch: master
+      repository: https://github.com/nothings/stb
+
+  - runs: |
+        install -Dm 644 *.h -t ${{targets.destdir}}/usr/include/
+        install -Dm 644 docs/* -t ${{targets.destdir}}/usr/share/doc/${{package.name}}/
+        install -Dm644 stb.pc -t ${{targets.destdir}}/usr/lib/pkgconfig
+        sed -i "s|@PKGVER@|${{package.version}}|" ${{targets.destdir}}/usr/lib/pkgconfig/stb.pc
+
+update:
+  enabled: true
+  git: {}
+  schedule:
+    period: weekly
+    reason: This project doesn't do releases, everything is commit based
+    # https://github.com/nothings/stb/issues/359
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

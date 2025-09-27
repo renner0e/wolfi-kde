@@ -1,0 +1,59 @@
+package:
+  name: qca
+  version: "2.3.10"
+  epoch: 0
+  description: Qt Cryptographic Architecture - straightforward cross-platform crypto API
+  copyright:
+    - license: LGPL-2.1 license
+
+environment:
+  contents:
+    packages:
+      - botan-dev
+      - build-base
+      - busybox
+      - cmake
+      - libgcrypt-dev
+      - libnss-dev
+      - openssl-dev
+      - qt6-qt5compat-dev
+      - qt6-qtbase-dev
+      # TODO: qdoc
+      # TODO: some fuckery with acl
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 
+      repository: https://invent.kde.org/libraries/qca
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DQT6=ON
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

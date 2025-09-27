@@ -1,0 +1,58 @@
+package:
+  name: libaccounts-qt
+  version: "1.17"
+  epoch: 0
+  description: Qt-based client library for the accounts database
+  copyright:
+    - license: LGPL-2.1-only
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - doxygen
+      - glib-dev
+      - libaccounts-glib-dev
+      - qt5-qtbase-dev
+      - qt6-qtbase-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: c8fdd05f1a1ff5886f4649d24f2ba8c5f61cfa3a
+      repository: https://gitlab.com/accounts-sso/libaccounts-qt
+      tag: VERSION_${{package.version}}
+
+
+  - runs: |
+      qmake6 \
+      PREFIX=/usr \
+      LIBDIR=/usr/lib \
+      QMF_INSTALL_ROOT=/usr \
+      CONFIG+=release \
+      QMAKE_INCDIR=/usr/include/qt6
+
+      make
+      make install INSTALL_ROOT=${{targets.contextdir}}
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

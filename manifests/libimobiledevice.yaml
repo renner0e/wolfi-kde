@@ -1,0 +1,47 @@
+package:
+  name: libimobiledevice
+  version: ""
+  epoch: 0
+  description: 
+  copyright:
+    - license: BSD-2-Clause AND BSD-3-Clause AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only) AND MIT
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+      - extra-cmake-modules
+      - qt6-qtbase-dev
+      - qt6-qttools-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 15f8652126664e3a4b980e5d1c039b9053ce8566
+      repository: https://github.com/libimobiledevice/libimobiledevice
+      tag: v${{package.version}}
+
+      #TODO: autoconf
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

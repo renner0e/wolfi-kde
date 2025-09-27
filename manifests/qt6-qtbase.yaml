@@ -78,11 +78,24 @@ pipeline:
 subpackages:
   - name: ${{package.name}}-dev
     pipeline:
+      - runs: |
+          mkdir -p ${{targets.subpkgdir}}/usr/bin
+          ln -s /usr/lib/qt5/bin/androidtestrunner ${{targets.contextdir}}/usr/bin
+          ln -s /usr/lib/qt6/bin/qdbuscpp2xml ${{targets.contextdir}}/usr/bin
+          ln -s /usr/lib/qt6/bin/qdbusxml2cpp ${{targets.contextdir}}/usr/bin
+          ln -s /usr/lib/qt6/bin/qmake ${{targets.contextdir}}/usr/bin
+          ln -s /usr/lib/qt6/bin/qmake6 ${{targets.contextdir}}/usr/bin
+          ln -s /usr/lib/qt6/bin/qt-cmake ${{targets.contextdir}}/usr/bin
+          ln -s /usr/lib/qt6/bin/qt-cmake-create ${{targets.contextdir}}/usr/bin
+          ln -s /usr/lib/qt6/bin/qt-configure-module ${{targets.contextdir}}/usr/bin
+          ln -s /usr/lib/qt6/bin/androiddeployqt ${{targets.contextdir}}/usr/bin
+          ln -s /usr/lib/qt6/bin/androiddeployqt6 ${{targets.contextdir}}/usr/bin
       - uses: split/dev
     test:
       pipeline:
         - uses: test/pkgconf
         - uses: test/tw/ldd-check
+        - uses: test/tw/symlink-check
 
   - name: ${{package.name}}-x11
     pipeline:

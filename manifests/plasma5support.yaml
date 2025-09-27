@@ -1,0 +1,79 @@
+package:
+  name: plasma5support
+  version: "6.4.90"
+  epoch: 0
+  description: Support components for porting from KF5/Qt5 to KF6/Qt6
+  copyright:
+    - license: CC0-1.0 AND GPL-2.0-or-later AND LGPL-2.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - qt6-qtbase-dev
+      - libglvnd-dev
+      - qt6-qtdeclarative-dev
+      - kf6-kconfig-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
+      - kf6-knotifications-dev
+      - kf6-solid-dev
+      - kf6-kservice-dev
+      - kf6-kidletime-dev
+      - kf6-kio-dev
+      - kf6-kholidays-dev
+      - kf6-kwindowsystem-dev
+      - kf6-kunitconversion-dev
+      - libx11-dev
+      - kf6-kbookmarks-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kcompletion-dev
+      - kf6-kholidays-dev
+      - kf6-kitemviews-dev
+      - kf6-kjobwidgets-dev
+      - libxkbcommon-dev
+      - libxfixes-dev
+      - plasma-activities-dev
+      - kf6-networkmanager-qt-dev
+      - NetworkManager-dev
+      - vulkan-headers
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: d20f4c609842f61bd101f5651de38bb6e08e14c0
+      repository: https://invent.kde.org/plasma/plasma5support
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

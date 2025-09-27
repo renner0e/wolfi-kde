@@ -1,0 +1,92 @@
+package:
+  name: kaccounts-integration
+  version: "25.08.1"
+  epoch: 0
+  description: Online account management system and its Plasma integration components
+  copyright:
+    - license: GPLv2+
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+#      - kf6-karchive-dev
+#      - kf6-kauth-dev
+      - kf6-kbookmarks-dev
+      - kf6-kcodecs-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kcompletion-dev
+      - kf6-kconfig-dev
+      - kf6-kconfigwidgets-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kcmutils-dev
+      - kf6-kwallet-dev
+      - kf6-kdbusaddons-dev
+#      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
+      - kf6-kio-dev
+      - kf6-kitemviews-dev
+      - kf6-kjobwidgets-dev
+#      - kf6-kparts-dev
+      - kf6-kservice-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+#      - kf6-kxmlgui-dev
+      - kf6-solid-dev
+#      - kf6-sonnet-dev
+#      - kf6-syntax-highlighting-dev
+      - libglvnd-dev
+#      - libx11-dev
+#      - libx11-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - libx11-dev
+#      - qt6-qtspeech-dev
+      - vulkan-headers
+      - qcoro-dev
+      - libaccounts-qt-dev
+      - signond-dev
+
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 406b46890f29eac316281b8f56849cfd23a2501e
+      repository: https://invent.kde.org/network/kaccounts-integration
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    dependencies:
+        runtime:
+          - kf6-kparts
+          - kf6-syntax-highlighting
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

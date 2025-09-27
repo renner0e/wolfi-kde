@@ -1,10 +1,10 @@
 package:
-  name: kf6-kwindowsystem
-  version: "6.18.0"
+  name: libkexiv2-qt
+  version: "25.08.1"
   epoch: 0
-  description: KWindowSystem
+  description: Wrapper around Exiv2 library to manipulate picture metadata as EXIF and XMP
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: BSD-3-Clause AND CC0-1.0 AND GPL-2.0-or-later
 
 environment:
   contents:
@@ -13,32 +13,26 @@ environment:
       - busybox
       - extra-cmake-modules
       - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
-      - qt6-qtdeclarative-dev
-      - qt6-qttools-dev
-      - qt6-qtwayland-dev
+      #- qt6-qtdeclarative-dev
       - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
+      - exiv2-dev
+
+
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: 25898deec3e82200d9fe3e5dcaaea74cb3a3bf7b
+      repository: https://invent.kde.org/graphics/libkexiv2
       tag: v${{package.version}}
 
   - uses: cmake/configure
     with:
       opts: |
-        -DECM_DIR=/usr/share/ECM/
+        -DECM_DIR=/usr/share/ECM/ \
+        -DBUILD_WITH_QT6=ON \
+        -DBUILD_WITH_QT5=OFF
 
   - uses: cmake/build
 

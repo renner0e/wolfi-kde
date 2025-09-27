@@ -1,0 +1,58 @@
+package:
+  name: libaccounts-glib
+  version: 1.27
+  epoch: 0
+  description: GLib-based client library for the accounts database
+  copyright:
+    - license: LicenseRef-Callaway-LGPLv2
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - glib-dev
+      - libxml2-dev
+      - gobject-introspection-dev
+      - gobject-introspection-bin
+      - vala
+      - gtk-doc
+      - pkgconf-dev
+      - check-dev
+      - cmake
+      - ninja
+
+pipeline:
+  - uses: git-checkout
+    with:
+      repository: https://gitlab.com/accounts-sso/libaccounts-glib
+      tag: VERSION_${{package.version}}
+      expected-commit: 26c54322304e9df598b2ba67427433a2e68b823e
+
+  - uses: meson/configure
+
+  - uses: meson/compile
+
+  - uses: meson/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  release-monitor:
+    identifier: 6532
+    strip-prefix: VERSION_
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/pkgconf
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check

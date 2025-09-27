@@ -1,10 +1,10 @@
 package:
-  name: kf6-kwindowsystem
+  name: kf6-kparts
   version: "6.18.0"
   epoch: 0
-  description: KWindowSystem
+  description: KParts
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: CC0-1.0 AND GPL-2.0-or-later AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-or-later AND LGPL-3.0-only AND (LGPL-2.1-only OR LGPL-3.0-only)
 
 environment:
   contents:
@@ -12,27 +12,34 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
+      - kf6-kbookmarks-dev
+      - kf6-kcodecs-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kcompletion-dev
+      - kf6-kconfig-dev
+      - kf6-kconfigwidgets-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
+      - kf6-kio-dev
+      - kf6-kitemviews-dev
+      - kf6-kjobwidgets-dev
+      - kf6-kservice-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+      - kf6-kxmlgui-dev
+      - kf6-solid-dev
       - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
+      - libx11-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
-      - qt6-qttools-dev
-      - qt6-qtwayland-dev
       - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: 845b9bc6c3cbbd7fa6f01fd78e5733c92b262d94
+      repository: https://invent.kde.org/frameworks/kparts
       tag: v${{package.version}}
 
   - uses: cmake/configure

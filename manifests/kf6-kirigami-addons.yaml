@@ -1,10 +1,10 @@
 package:
-  name: kf6-kwindowsystem
-  version: "6.18.0"
+  name: kf6-kirigami-addons
+  version: "1.9.0"
   epoch: 0
-  description: KWindowSystem
+  description: Add-ons for the Kirigami framework
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: BSD-2-Clause AND CC-BY-SA-4.0 AND CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only) AND LicenseRef-KFQF-Accepted-GPL
 
 environment:
   contents:
@@ -12,27 +12,24 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
+      - kf6-kconfig-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kglobalaccel-dev
+      - kf6-kguiaddons-dev
+      - kf6-ki18n-dev
+      - kf6-kirigami-dev
       - libglvnd-dev
       - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
       - qt6-qttools-dev
-      - qt6-qtwayland-dev
       - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: d53b2b24608ae66dbaa4f09d8d7ebae6c9f642b5
+      repository: https://invent.kde.org/libraries/kirigami-addons
       tag: v${{package.version}}
 
   - uses: cmake/configure

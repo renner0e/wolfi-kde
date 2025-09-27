@@ -1,0 +1,58 @@
+package:
+  name: ddcutil
+  version: "2.2.1"
+  epoch: 0
+  description: Query and change monitor settings
+  copyright:
+    - license: GPL-2.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - pkgconf-dev
+      - libtool
+      - glib-dev
+      - jansson-dev
+      - systemd-dev
+      - libusb-dev
+      - libx11-dev
+      - libxrandr-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 0b26bbec67b09b5ab594a06de8bbbdea621e8628
+      repository: https://github.com/rockowitz/ddcutil
+      tag: v${{package.version}}
+
+  - uses: autoconf/configure
+
+  - uses: autoconf/make
+
+  - uses: autoconf/make-install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: rockowitz/ddcutil
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+    - runs: |
+        ddcutil --version
+        ddcutil --help

@@ -1,10 +1,10 @@
 package:
-  name: kf6-kwindowsystem
+  name: kf6-kquickcharts
   version: "6.18.0"
   epoch: 0
-  description: KWindowSystem
+  description: A QtQuick plugin providing high-performance charts.
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: BSD-2-Clause AND CC0-1.0 AND LGPL-2.1-only AND LGPL-3.0-only AND MIT
 
 environment:
   contents:
@@ -13,26 +13,17 @@ environment:
       - busybox
       - extra-cmake-modules
       - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
+      - qt6-qtshadertools-dev
       - qt6-qttools-dev
-      - qt6-qtwayland-dev
       - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: 9c9a322cd035d85d2da74159c3f4eda8a2ab1511
+      repository: https://invent.kde.org/frameworks/kquickcharts
       tag: v${{package.version}}
 
   - uses: cmake/configure

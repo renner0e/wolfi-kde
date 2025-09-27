@@ -1,10 +1,13 @@
 package:
-  name: kf6-kwindowsystem
+  name: kf6-networkmanager-qt
   version: "6.18.0"
   epoch: 0
-  description: KWindowSystem
+  description: Qt wrapper for NetworkManager API
   copyright:
-    - license: CC0-1.0 AND LGPL-2.1-only AND LGPL-2.1-or-later AND LGPL-3.0-only AND MIT
+    - license: CC0-1.0 AND GPL-2.0-only AND GPL-3.0-only AND LGPL-2.0-or-later AND LGPL-2.1-or-later AND (GPL-2.0-only OR GPL-3.0-only) AND MIT
+  dependencies:
+    runtime:
+      - NetworkManager
 
 environment:
   contents:
@@ -12,27 +15,24 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
+#      - kf6-kconfig-dev
+#      - kf6-kglobalaccel-dev
+#      - kf6-kguiaddons-dev
+#      - kf6-ki18n-dev
+#      - kf6-kwidgetsaddons-dev
       - libglvnd-dev
-      - libxkbcommon-dev
-      - plasma-wayland-protocols
-      - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
-      - qt6-qttools-dev
-      - qt6-qtwayland-dev
-      - vulkan-headers
-      - wayland-dev
-      - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
-      - xcb-util-keysyms-dev
-      - libxfixes-dev
+      - NetworkManager-dev
+#      - qt6-qtshadertools-dev
+#      - qt6-qttools-dev
+      #- vulkan-headers
 
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
-      repository: https://invent.kde.org/frameworks/kwindowsystem
+      expected-commit: fc58d0388141e6fe20e35ed266498591dc2ac51a
+      repository: https://invent.kde.org/frameworks/networkmanager-qt
       tag: v${{package.version}}
 
   - uses: cmake/configure
@@ -54,6 +54,9 @@ update:
 subpackages:
   - name: ${{package.name}}-dev
     description: ${{package.name}} development libraries and headers
+    dependencies:
+      runtime:
+        - NetworkManager-dev
     pipeline:
       - uses: split/dev
     test:

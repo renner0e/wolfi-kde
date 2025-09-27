@@ -1,0 +1,51 @@
+package:
+  name: media-player-info
+  version: "23"
+  epoch: 0
+  description: mediaplayerinfo
+  copyright:
+    - license: LicenseRef-Callaway-BSD
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - cmake
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: 
+      repository: https://gitlab.freedesktop.org/media-player-info/media-player-info
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+

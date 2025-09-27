@@ -1,0 +1,52 @@
+package:
+  name: exiv2
+  version: "0.28.7"
+  epoch: 0
+  description:  Image metadata library and tools 
+  copyright:
+    - license: GPL-2.0-or-later AND BSD-3-Clause AND LicenseRef-Fedora-Public-Domain
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - zlib-dev
+      - brotli-dev
+      - expat-dev
+      - inih-dev
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: afcb7a8ba84a7de36d2f1ee7689394e078697956
+      repository: https://github.com/Exiv2/exiv2
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: Exiv2/exiv2
+    strip-prefix: v
+
+subpackages:
+  - name: ${{package.name}}-dev
+    description: ${{package.name}} development libraries and headers
+    pipeline:
+      - uses: split/dev
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+        - uses: test/pkgconf
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+
