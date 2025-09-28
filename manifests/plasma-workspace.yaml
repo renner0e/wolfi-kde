@@ -106,13 +106,13 @@ environment:
       - xcb-util-dev
       - xcb-util-image-dev
       - zxing-cpp-dev
-      - libice-dev
       # TODO: this was missing but cmake didn't complain
       - kf6-kded-dev
       - kf6-qqc2-desktop-style-dev
+      - appstream-dev
+      - appstream-qt
       # For the applet tests
       #- selenium
-      - xcb-util-cursor-dev
 
   environment:
     GCC_SPEC_FILE: no-hardening.spec
@@ -130,7 +130,7 @@ pipeline:
         -DECM_DIR=/usr/share/ECM/ \
         -DPLASMA_X11_DEFAULT_SESSION=OFF \
         -DINSTALL_SDDM_WAYLAND_SESSION=ON \
-        -DWITH_X11=1 \
+        -DWITH_X11=0 \
         -DBUILD_TESTING=OFF \
         -DPACKAGEKIT_OFFLINE_UPDATES=OFF
 

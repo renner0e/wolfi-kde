@@ -9,22 +9,23 @@ package:
 environment:
   contents:
     packages:
-      - busybox
       - build-base
-      - glib-dev
+      - busybox
       - curl-dev
-      - libxmlb-dev
-      - libxml2-dev
-      - yaml-dev
-      - zstd-dev
-      - systemd-dev
+      - glib-dev
+      - glib-gir
       - gobject-introspection-dev
-      - snowball-dev
       - gperf
       - itstool
+      - libxml2-dev
+      - libxmlb-dev
       - py3-gi-docgen
-      - glib-gir
+      - qt6-qtbase-dev
       - smartypants
+      - snowball-dev
+      - systemd-dev
+      - yaml-dev
+      - zstd-dev
 
 pipeline:
   - uses: git-checkout
@@ -34,12 +35,22 @@ pipeline:
       expected-commit: 8af1b8b61c5682751cec21c5b644cb1b8d20d5c6
 
   - uses: meson/configure
+    with:
+      opts: |
+        -Dqt=true \
+        -Dqt-versions=6
 
   - uses: meson/compile
 
   - uses: meson/install
 
   - uses: strip
+
+update:
+  enabled: true
+  release-monitor:
+    identifier: 10385
+    strip-prefix: v
 
 subpackages:
   - name: ${{package.name}}-dev
@@ -50,3 +61,19 @@ subpackages:
       pipeline:
         - uses: test/pkgconf
         - uses: test/tw/ldd-check
+          with:
+            packages: ${{subpkg.name}}
+
+  - name: ${{package.name}}-qt
+    description: Qt6 bindings for ${{package.name}}
+    pipeline:
+      - runs: |
+          mkdir -p ${{targets.subpkgdir}}/usr/lib/
+          mv ${{targets.destdir}}/usr/lib/libAppStreamQt.so* ${{targets.subpkgdir}}/usr/lib/
+    test:
+      pipeline:
+        - uses: test/tw/ldd-check
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
