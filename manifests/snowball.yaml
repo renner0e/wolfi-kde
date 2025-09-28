@@ -20,15 +20,19 @@ pipeline:
       tag: v${{package.version}}
       expected-commit: e4b3efb449ccb994d39230eb6e8440d267471f4a
 
+  - uses: patch
+    with:
+      patches: sharedlib.patch
+
   - uses: autoconf/make
 
   - runs: |
-      install -Dpm0755 -t "${{targets.destdir}}/usr/bin" ./snowball 
+      install -Dpm0755 -t "${{targets.destdir}}/usr/bin" ./snowball
       install -Dpm0755 -t "${{targets.destdir}}/usr/bin" ./stemwords
       install -Dpm0644 -t "${{targets.destdir}}/usr/lib" "./libstemmer.so.0.0.0"
       ln -s "./libstemmer.so.0.0.0" "${{targets.destdir}}/usr/lib/libstemmer.so.0"
       ln -s "./libstemmer.so.0.0.0" "${{targets.destdir}}/usr/lib/libstemmer.so"
-      install -Dpm644 -t "${{targets.destdir}}/usr/include" ./include/libstemmer.h 
+      install -Dpm644 -t "${{targets.destdir}}/usr/include" ./include/libstemmer.h
 
 subpackages:
   - name: ${{package.name}}-dev
