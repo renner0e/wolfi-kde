@@ -14,11 +14,8 @@ environment:
       - extra-cmake-modules
       - libglvnd-dev
       - qt6-qtbase-dev
-      #- qt6-qtdeclarative-dev
       - vulkan-headers
       - exiv2-dev
-
-
 
 pipeline:
   - uses: git-checkout

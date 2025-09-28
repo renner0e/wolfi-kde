@@ -13,8 +13,6 @@ environment:
       - busybox
       - libglvnd-dev
       - opencv-dev
-      - qt6-qtdeclarative-dev
-      - qt6-qtmultimedia-dev
       - stb
 
 pipeline:
@@ -29,8 +27,6 @@ pipeline:
       opts: |
         -DZXING_DEPENDENCIES=LOCAL \
         -DZXING_PYTHON_MODULE=off
-
-
 
   - uses: cmake/build
 

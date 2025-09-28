@@ -2,7 +2,7 @@ package:
   name: switcheroo-control
   version: "3.0"
   epoch: 0
-  description: 
+  description: D-Bus service to check the availability of dual-GPU
   copyright:
     - license: GNU GPLv3
 
@@ -16,7 +16,6 @@ environment:
       - libdrm-dev
       - python3-dev
       - gtk-doc
-
 
 pipeline:
   - uses: git-checkout

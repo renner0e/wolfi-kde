@@ -30,13 +30,7 @@ jobs:
             apk update && apk add melange just ripgrep
             cd /workspace
             melange keygen
-            just qt
-            just appstream
-            just pipewire
-            just networkmanager
-            just framework-deps
-            just kde-frameworks
-            just kde
+            just world
 
 
       - name: Upload build artifacts

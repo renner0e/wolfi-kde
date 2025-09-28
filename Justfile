@@ -41,7 +41,7 @@ appstream:
   just build snowball
   just build appstream
 
-pipewire:
+pw:
   just build fdk-aac
   just build ldacbt
   just build libcamera
@@ -59,7 +59,7 @@ pipewire:
   just build webrtc-audio-processing
   just build pipewire
 
-networkmanager:
+nm:
   just build libmbim
   just build libqrtr-glib
   just build libqmi
@@ -69,8 +69,18 @@ networkmanager:
   just build newt
   just build NetworkManager
 
-qt:
+
+# build this before doing qt
+qt-deps:
   just build xcb-util-cursor # I do not want an xorg session, libplasma doesn't build without it
+  just build minizip-ng
+  just build assimp
+
+  just build jsoncpp # I do not want to have this, build flag shenanigans
+  just build openxr
+
+
+qt:
   just build qt5-qtbase # needs fixes or else it conflicts with qmake with qt6
   just build qt6-qtbase # I do not want to have this, needs wayland and vulkan flags
   just build qt6-qtshadertools
@@ -87,11 +97,6 @@ qt:
   just build qt6-qtremoteobjects
   just build qt6-qtquicktimeline
 
-  just build minizip-ng
-  just build assimp
-
-  just build jsoncpp # I do not want to have this, build flag shenanigans
-  just build openxr
   just build qt6-qtquick3d
 
   just build qt6-qt3d
@@ -115,7 +120,8 @@ qt:
   #just build libvpx
   #just build qt6-qtwebengine
 
-frameworks-deps:
+# dependencies are all in wolfi, build this first
+deps1:
   just build extra-cmake-modules # for fucking everything
   just build plasma-wayland-protocols
 
@@ -124,15 +130,8 @@ frameworks-deps:
   just build stb
   just build zxing-cpp
 
-  # kauth
-  just build polkit-qt-1
-
-  # syntax highlighting
-  just build xerces-c
-
   # kwallet
   just build gpgmepp
-  just build qca
 
   # kio
   just build libgudev
@@ -141,29 +140,57 @@ frameworks-deps:
   # kimageformats
   just build libraw
 
-  # knotifications
-  just build libcanberra
-
-  # networkmanager-qt
-  just networkmanager
-
   # kwin and plasma-desktop
   just build libdisplay-info
   just build libei
 
   # plasma-desktop
   just build exiv2
-  just build libkexiv2-qt
   just build libqalculate
 
-kde-frameworks:
-  just kde-frameworks-tier1
-  just kde-frameworks-tier2
-  just kde-frameworks-tier3
-  just kde-frameworks-tier4
+  # libaccounts-qt -> kaccounts
+  just build libaccounts-glib
+
+  # appmenu-gtk-module
+  just build libwnck
+
+  # plasma-desktop
+  just build libwacom
+
+  # kio-extras
+  just build gsettings-desktop-schemas
+
+# depend on qt stuff
+deps2:
+  # kauth
+  just build polkit-qt-1
+
+  # syntax highlighting
+  just build xerces-c
+
+  # kwallet
+  just build qca
+
+  # plasma-workspace
+  just build qcoro
+  # build with qt support
+  just build poppler
+
+  just build phonon
+
+  just build libaccounts-qt
+  just build signond
+
+  just build libproxy
+
+kf:
+  just kf-t1
+  just kf-t2
+  just kf-t3
+  just kf-t4
 
 # dependencies on qt
-kde-frameworks-tier1:
+kf-t1:
   just build kf6-attica
   just build kf6-breeze-icons
   just build kf6-karchive
@@ -191,7 +218,7 @@ kde-frameworks-tier1:
   just build kf6-syntax-highlighting
 
 # dependencies on tier1
-kde-frameworks-tier2:
+kf-t2:
   just build kf6-kauth
   just build kf6-kbookmarks
   just build kf6-kcolorscheme
@@ -211,9 +238,9 @@ kde-frameworks-tier2:
   just build kf6-kuserfeedback
   just build kf6-syndication
 
-kde-frameworks-tier3:
-  just build kf6-frameworkintegration
+kf-t3:
   just build kf6-kconfigwidgets
+  just build kf6-kded
   just build kf6-kdesu
   just build kf6-kiconthemes
   just build kf6-kjobwidgets
@@ -223,19 +250,21 @@ kde-frameworks-tier3:
   just build kf6-kxmlgui
   just build kf6-qqc2-desktop-style
 
-kde-frameworks-tier4:
+kf-t4:
+  just build kf6-kio
+  just build kf6-frameworkintegration
   just build kf6-baloo
   just build kf6-kcmutils
-  just build kf6-kded
-  just build kf6-kio
   just build kf6-knotifyconfig
   just build kf6-kparts
   just build kf6-ktexteditor
   just build kf6-ktextwidgets
 
 kde:
+  just build libkexiv2-qt
   just build kdecoration
   just build plasma-activities
+  just build plasma-activities-stats
   just build kpipewire
   just build kdecoration
   just build kwayland
@@ -252,6 +281,11 @@ kde:
   just build kwin
   just build libksysguard
   just build plasma-workspace
+  just build kaccounts-integration
+
+  just build plasma-desktop
+
+world: deps1 pw qt-deps qt deps2 appstream nm kf kde
 
 build-tree:
     echo "This will build all packages required for Wolfi Bootc"

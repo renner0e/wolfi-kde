@@ -12,40 +12,14 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
-#      - kf6-karchive-dev
-#      - kf6-kauth-dev
-#      - kf6-kbookmarks-dev
-#      - kf6-kcodecs-dev
-#      - kf6-kcolorscheme-dev
-#      - kf6-kcompletion-dev
-#      - kf6-kconfig-dev
-#      - kf6-kconfigwidgets-dev
-#      - kf6-kcoreaddons-dev
-#      - kf6-kguiaddons-dev
-#      - kf6-ki18n-dev
-#      - kf6-kio-dev
-#      - kf6-kitemviews-dev
-#      - kf6-kjobwidgets-dev
-#      - kf6-kparts-dev
-#      - kf6-kservice-dev
-#      - kf6-kwidgetsaddons-dev
-#      - kf6-kwindowsystem-dev
-#      - kf6-kxmlgui-dev
-#      - kf6-solid-dev
-#      - kf6-sonnet-dev
-#      - kf6-syntax-highlighting-dev
+      - glib-dev
       - libglvnd-dev
-#      - libx11-dev
-#      - libx11-dev
-#      - qt6-qtbase-dev
+      - pulseaudio-dev
+      - qt6-qt5compat-dev
+      - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
       - qt6-qttools-dev
-      - qt6-qt5compat-dev
-#      - qt6-qtspeech-dev
       - vulkan-headers
-      - pulseaudio-dev
-      - glib-dev
-
 
 pipeline:
   - uses: git-checkout
@@ -59,8 +33,7 @@ pipeline:
       opts: |
         -DECM_DIR=/usr/share/ECM/ \
         -DPHONON_BUILD_QT5=OFF \
-        -DPHONON_BUILD_QT6=ON \
-        -DPHONON_INSTALL_QT_EXTENSIONS_INTO_SYSTEM_QT=FALSE
+        -DPHONON_BUILD_QT6=ON
 
   - uses: cmake/build
 

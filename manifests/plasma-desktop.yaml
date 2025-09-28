@@ -12,94 +12,65 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
-#      - freetype-dev
-#      - hwdata-dev
-#      - hwdata-pnp
-#      - kdecoration-dev
+      - kaccounts-integration-dev
       - kf6-attica-dev
       - kf6-kauth-dev
+      - kf6-kbookmarks-dev
       - kf6-kcmutils-dev
       - kf6-kcodecs-dev
       - kf6-kcolorscheme-dev
+      - kf6-kcompletion-dev
       - kf6-kconfig-dev
       - kf6-kconfigwidgets-dev
       - kf6-kcoreaddons-dev
       - kf6-kcrash-dev
       - kf6-kdbusaddons-dev
-#      - kf6-kdeclarative-dev
-#      - kf6-kdoctools-dev
+      - kf6-kdoctools-dev
       - kf6-kglobalaccel-dev
       - kf6-kguiaddons-dev
       - kf6-ki18n-dev
-#      - kf6-kidletime-dev
-#      - kf6-kirigami-dev
-      - kf6-knewstuff-dev
+      - kf6-kiconthemes-dev
       - kf6-kio-dev
+      - kf6-kirigami-addons-dev
+      - kf6-kirigami-dev
+      - kf6-kitemmodels-dev
+      - kf6-kitemviews-dev
+      - kf6-kjobwidgets-dev
+      - kf6-knewstuff-dev
+      - kf6-knotifications-dev
+      - kf6-knotifyconfig-dev
       - kf6-kpackage-dev
-#      - kf6-kservice-dev
+      - kf6-krunner-dev
+      - kf6-kservice-dev
       - kf6-ksvg-dev
       - kf6-kwidgetsaddons-dev
       - kf6-kwindowsystem-dev
       - kf6-kxmlgui-dev
-      - kf6-kiconthemes-dev
-#      - kglobalacceld-dev
-#      - kpipewire-dev
-#      - kwayland-dev
-#      - libcanberra-dev
-#      - libei-dev
+      - kf6-qqc2-desktop-style-dev
+      - kf6-solid-dev
+      - kf6-sonnet-dev
+      - kscreenlocker-dev
+      - kwin-dev
+      - libaccounts-qt-dev
       - libglvnd-dev
-#      - libinput-dev
-#      - libxcvt-dev
-#      - plasma-activities-dev
-#      - plasma-wayland-protocols-dev
+      - libplasma-dev
+      - libsdl2-dev
+      - libwacom-dev
+      - libx11-dev
+      - plasma-activities-dev
+      - plasma-activities-stats-dev
+      - plasma-workspace-dev
+      - plasma5support-dev
       - qt6-qt5compat-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
-#      - qt6-qtsensors-dev
       - qt6-qtshadertools-dev
       - qt6-qtsvg-dev
-#      - qt6-qttools-dev
       - qt6-qtwayland-dev
+      - signond-dev
       - vulkan-headers
       - wayland-dev
       - wayland-protocols
-#      - wayland-protocols
-#      - libqaccessibilityclient-dev
-#      - libdisplay-info-dev
-      - kf6-knotifications-dev
-#      - pipewire-dev
-#      - knighttime-dev
-#      - kscreenlocker-dev
-#      - kscreen-dev
-      - kf6-krunner-dev
-      - libx11-dev
-      - kf6-kbookmarks-dev
-      - kf6-kcompletion-dev
-      - kf6-kitemviews-dev
-      - kf6-kitemmodels-dev
-      - kf6-sonnet-dev
-      - kf6-knotifyconfig-dev
-      - kf6-kjobwidgets-dev
-      - kf6-solid-dev
-      - kf6-kservice-dev
-      - plasma5support-dev
-      - libplasma-dev
-      - plasma-activities-dev
-      - plasma-activities-stats-dev
-      - kf6-kdoctools-dev
-      - kf6-kirigami-dev
-      - kf6-kirigami-addons-dev
-      - libwacom-dev
-      - libsdl2-dev
-      - plasma-workspace-dev
-      - kwin-dev
-      - kscreenlocker-dev
-      - plasma-workspace-dev
-      - kf6-qqc2-desktop-style-dev
-      - kaccounts-integration-dev
-      - libaccounts-qt-dev
-      - signond-dev
-      - plasma-workspace-dev
 
 pipeline:
   - uses: git-checkout
@@ -114,8 +85,6 @@ pipeline:
         -DECM_DIR=/usr/share/ECM/ \
         -DBUILD_KCM_MOUSE_X11=OFF \
         -DBUILD_KCM_TOUCHPAD_X11=OFF
-
-
 
   - uses: cmake/build
 
@@ -136,9 +105,4 @@ subpackages:
     test:
       pipeline:
         - uses: test/tw/ldd-check
-
-test:
-  pipeline:
-    - runs: |
-        kwin --version
-
+        - uses: test/pkgconf
