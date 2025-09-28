@@ -11,16 +11,15 @@ environment:
     packages:
       - build-base
       - busybox
-      - glib-dev
-      - libxml2-dev
-      - gobject-introspection-dev
-      - gobject-introspection-bin
-      - vala
-      - gtk-doc
-      - pkgconf-dev
       - check-dev
-      - cmake
-      - ninja
+      - glib-dev
+      - glib-gir
+      - gobject-introspection-bin
+      - gobject-introspection-dev
+      - gtk-doc
+      - libxml2-dev
+      - pkgconf-dev
+      - vala
 
 pipeline:
   - uses: git-checkout
