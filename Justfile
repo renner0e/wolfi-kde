@@ -152,7 +152,7 @@ deps1:
   just build libaccounts-glib
 
   # appmenu-gtk-module
-  just build libwnck
+  #just build libwnck
 
   # plasma-desktop
   just build libwacom
@@ -283,7 +283,7 @@ kde:
   just build plasma-workspace
   just build kaccounts-integration
 
-  just build plasma-desktop
+  #just build plasma-desktop
 
 world: deps1 pw qt-deps qt deps2 appstream nm kf kde
 
