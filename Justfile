@@ -158,7 +158,7 @@ deps1:
   just build libwacom
 
   # kio-extras
-  just build gsettings-desktop-schemas
+  #just build gsettings-desktop-schemas
 
 # depend on qt stuff
 deps2:
