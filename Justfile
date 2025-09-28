@@ -36,8 +36,42 @@ build $package="":
         --workspace-dir "./.cache/workspace/${package}" \
         --runner "${MELANGE_RUNNER}"
 
+appstream:
+  just build libxmlb
+  just build snowball
+  just build appstream
+
+pipewire:
+  just build fdk-aac
+  just build ldacbt
+  just build libcamera
+  just build libcanberra
+  just build libfreeaptx
+  just build liblc3
+  just build cunit
+  just build libmysofa
+  just build serd
+  just build zix
+  just build sord
+  just build lv2
+  just build srantom
+  just build lilv
+  just build webrtc-audio-processing
+  just build pipewire
+
+networkmanager:
+  just build libmbim
+  just build libqrtr-glib
+  just build libqmi
+  just build ModemManager
+  just build libndp
+  just build mobile-broadband-provider-info
+  just build newt
+  just build NetworkManager
+
 qt:
   just build xcb-util-cursor # I do not want an xorg session, libplasma doesn't build without it
+  just build qt5-qtbase # needs fixes or else it conflicts with qmake with qt6
   just build qt6-qtbase # I do not want to have this, needs wayland and vulkan flags
   just build qt6-qtshadertools
   just build qt6-qtsvg
@@ -68,22 +102,7 @@ qt:
   just build qt6-qtnetworkauth
   just build qt6-qtlanguageserver
 
-  just build fdk-aac
-  just build ldacbt
-  just build libcamera
-  just build libcanberra
-  just build libfreeaptx
-  just build liblc3
-  just build cunit
-  just build libmysofa
-  just build serd
-  just build zix
-  just build sord
-  just build lv2
-  just build srantom
-  just build lilv
-  just build webrtc-audio-processing
-  just build pipewire
+
   just build qt6-qtmultimedia
   #just build qt6-qtdatavis3d
 
@@ -93,39 +112,146 @@ qt:
   just build qt6-qtdoc
   just build qt6-qtgraphs
 
-  just build libvpx
+  #just build libvpx
   #just build qt6-qtwebengine
 
-kde:
-  just build extra-cmake-modules
-  just build libxmlb
-  just build snowball
-  just build appstream
-
+frameworks-deps:
+  just build extra-cmake-modules # for fucking everything
   just build plasma-wayland-protocols
 
+  # prison
+  just build libqrencode
+  just build stb
+  just build zxing-cpp
+
+  # kauth
+  just build polkit-qt-1
+
+  # syntax highlighting
+  just build xerces-c
+
+  # kwallet
+  just build gpgmepp
+  just build qca
+
+  # kio
+  just build libgudev
+  just build switcheroo-control
+
+  # kimageformats
+  just build libraw
+
+  # knotifications
+  just build libcanberra
+
+  # networkmanager-qt
+  just networkmanager
+
+  # kwin and plasma-desktop
+  just build libdisplay-info
+  just build libei
+
+  # plasma-desktop
+  just build exiv2
+  just build libkexiv2-qt
+  just build libqalculate
+
+kde-frameworks:
+  just kde-frameworks-tier1
+  just kde-frameworks-tier2
+  just kde-frameworks-tier3
+  just kde-frameworks-tier4
+
+# dependencies on qt
+kde-frameworks-tier1:
+  just build kf6-attica
   just build kf6-breeze-icons
   just build kf6-karchive
-  just build kf6-kcoreaddons
-  just build kf6-ki18n
-  just build kf6-kconfig
-  just build kf6-kwidgetsaddons
   just build kf6-kcodecs
+  just build kf6-kconfig
+  just build kf6-kcoreaddons
   just build kf6-kdbusaddons
+  just build kf6-kglobalaccel
   just build kf6-kguiaddons
-  just build kf6-kwindowsystem
+  just build kf6-kholidays
+  just build kf6-ki18n
+  just build kf6-kidletime
+  just build kf6-kirigami
+  just build kf6-kitemmodels
   just build kf6-kitemviews
-
-  just build kf6-kfilemetadata
-  just build polkit-qt-1
-  just build kf6-kauth
-
-  just build libraw
-  # TODO: remove libjxl this is in wolfi now
-  #just build libjxl
-  just build kf6-kimageformats
-
+  just build kf6-kquickcharts
   just build kf6-ktexttemplate
+  just build kf6-kunitconversion
+  just build kf6-kwidgetsaddons
+  just build kf6-kwindowsystem
+  just build kf6-networkmanager-qt
+  just build kf6-prison
+  just build kf6-solid
+  just build kf6-sonnet
+  just build kf6-syntax-highlighting
+
+# dependencies on tier1
+kde-frameworks-tier2:
+  just build kf6-kauth
+  just build kf6-kbookmarks
+  just build kf6-kcolorscheme
+  just build kf6-kcompletion
+  just build kf6-kcrash
+  just build kf6-kdeclarative
+  just build kf6-kdoctools
+  just build kf6-kfilemetadata
+  just build kf6-kimageformats
+  just build kf6-kirigami-addons
+  just build kf6-knotifications
+  just build kf6-kpackage
+  just build kf6-kpty
+  just build kf6-krunner
+  just build kf6-kstatusnotifieritem
+  just build kf6-ksvg
+  just build kf6-kuserfeedback
+  just build kf6-syndication
+
+kde-frameworks-tier3:
+  just build kf6-frameworkintegration
+  just build kf6-kconfigwidgets
+  just build kf6-kdesu
+  just build kf6-kiconthemes
+  just build kf6-kjobwidgets
+  just build kf6-knewstuff
+  just build kf6-kservice
+  just build kf6-kwallet
+  just build kf6-kxmlgui
+  just build kf6-qqc2-desktop-style
+
+kde-frameworks-tier4:
+  just build kf6-baloo
+  just build kf6-kcmutils
+  just build kf6-kded
+  just build kf6-kio
+  just build kf6-knotifyconfig
+  just build kf6-kparts
+  just build kf6-ktexteditor
+  just build kf6-ktextwidgets
+
+kde:
+  just build kdecoration
+  just build plasma-activities
+  just build kpipewire
+  just build kdecoration
+  just build kwayland
+  just build plasma5support
+  just build kglobalacceld
+  just build knighttime
+  just build layer-shell-qt
+  just build libkscreen
+  just build libplasma
+  just build kscreenlocker
+  just build kscreen
+  just build libqaccessibilityclient
+  just build plasma-breeze
+  just build kwin
+  just build libksysguard
+  just build plasma-workspace
 
 build-tree:
     echo "This will build all packages required for Wolfi Bootc"

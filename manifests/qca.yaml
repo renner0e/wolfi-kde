@@ -12,7 +12,6 @@ environment:
       - botan-dev
       - build-base
       - busybox
-      - cmake
       - libgcrypt-dev
       - libnss-dev
       - openssl-dev

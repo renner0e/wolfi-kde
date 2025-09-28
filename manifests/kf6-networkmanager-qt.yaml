@@ -12,21 +12,13 @@ package:
 environment:
   contents:
     packages:
+      - NetworkManager-dev
       - build-base
       - busybox
       - extra-cmake-modules
-#      - kf6-kconfig-dev
-#      - kf6-kglobalaccel-dev
-#      - kf6-kguiaddons-dev
-#      - kf6-ki18n-dev
-#      - kf6-kwidgetsaddons-dev
       - libglvnd-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
-      - NetworkManager-dev
-#      - qt6-qtshadertools-dev
-#      - qt6-qttools-dev
-      #- vulkan-headers
 
 pipeline:
   - uses: git-checkout

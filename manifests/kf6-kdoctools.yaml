@@ -16,7 +16,6 @@ environment:
     packages:
       - build-base
       - busybox
-      - cmake
       - extra-cmake-modules
       - qt6-qtbase-dev
       - kf6-karchive-dev

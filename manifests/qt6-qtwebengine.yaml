@@ -14,7 +14,6 @@ environment:
       - bison
       - build-base
       - busybox
-      - cmake
       - dbus-dev
       - flex
       - fontconfig-dev

@@ -11,7 +11,6 @@ environment:
     packages:
       - build-base
       - busybox
-      - cmake
       - extra-cmake-modules
       - kf6-kcmutils-dev
       - kf6-kcodecs-dev
@@ -21,6 +20,7 @@ environment:
       - kf6-kcoreaddons-dev
       - kf6-kcrash-dev
       - kf6-kdbusaddons-dev
+      - kf6-kguiaddons-dev
       - kf6-ki18n-dev
       - kf6-kimageformats-dev
       - kf6-kpackage-dev

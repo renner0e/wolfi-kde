@@ -13,8 +13,9 @@ environment:
       - busybox
       - extra-cmake-modules
       - libglvnd-dev
+      - libxfixes-dev
       - libxkbcommon-dev
-      - plasma-wayland-protocols
+      - libxrandr-dev
       - plasma-wayland-protocols-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
@@ -23,10 +24,8 @@ environment:
       - vulkan-headers
       - wayland-dev
       - wayland-protocols
-      - libxrandr-dev
-      - xcb-util-wm-dev
       - xcb-util-keysyms-dev
-      - libxfixes-dev
+      - xcb-util-wm-dev
 
 pipeline:
   - uses: git-checkout

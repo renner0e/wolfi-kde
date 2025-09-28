@@ -2,9 +2,9 @@ package:
   name: kf6-frameworkintegration
   version: "6.18.0"
   epoch: 0
-  description: 
+  description: Framework Integration is a set of plugins responsible for better integration of Qt applications when running on a KDE Plasma workspace.
   copyright:
-    - license: 
+    - license: CC0-1.0 AND LGPL-2.0-only AND LGPL-2.0-or-later AND LGPL-3.0-only AND LicenseRef-KDE-Accepted-LGPL
 
 environment:
   contents:
@@ -12,39 +12,19 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
-#      - kf6-karchive-dev
-#      - kf6-kauth-dev
-#      - kf6-kbookmarks-dev
-#      - kf6-kcodecs-dev
-      - kf6-kcolorscheme-dev
-      - kf6-kiconthemes-dev
-      - kf6-knotifications-dev
-#      - kf6-kcompletion-dev
-      - kf6-kconfig-dev
-#      - kf6-kconfigwidgets-dev
-      - kf6-kcoreaddons-dev
-      - kf6-kpackage-dev
-#      - kf6-kguiaddons-dev
-      - kf6-ki18n-dev
-#      - kf6-kio-dev
-#      - kf6-kitemviews-dev
-#      - kf6-kjobwidgets-dev
-#      - kf6-kparts-dev
-#      - kf6-kservice-dev
-      - kf6-kwidgetsaddons-dev
-      - kf6-knewstuff-dev
       - kf6-attica-dev
-#      - kf6-kwindowsystem-dev
-#      - kf6-kxmlgui-dev
-#      - kf6-solid-dev
-#      - kf6-sonnet-dev
-#      - kf6-syntax-highlighting-dev
+      - kf6-kcolorscheme-dev
+      - kf6-kconfig-dev
+      - kf6-kcoreaddons-dev
+      - kf6-ki18n-dev
+      - kf6-kiconthemes-dev
+      - kf6-knewstuff-dev
+      - kf6-knotifications-dev
+      - kf6-kpackage-dev
+      - kf6-kwidgetsaddons-dev
       - libglvnd-dev
-#      - libx11-dev
-#      - libx11-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
-#      - qt6-qtspeech-dev
       - vulkan-headers
       # We are not doing packagekit and appstreamqt for now
 

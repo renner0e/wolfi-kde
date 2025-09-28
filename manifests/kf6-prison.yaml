@@ -13,16 +13,13 @@ environment:
       - busybox
       - extra-cmake-modules
       - libglvnd-dev
-#      - libxkbcommon-dev
+      - libqrencode-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev
       - qt6-qtmultimedia-dev
-#      - qt6-qtshadertools-dev
-#      - qt6-qtsvg-dev
       - qt6-qttools-dev
       - vulkan-headers
       - zxing-cpp-dev
-      - libqrencode-dev
 
 pipeline:
   - uses: git-checkout

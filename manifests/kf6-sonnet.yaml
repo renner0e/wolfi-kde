@@ -12,12 +12,12 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
-      - qt6-qtbase-dev
-      - libglvnd-dev
-      - qt6-qtdeclarative-dev
-      - vulkan-headers
-      - qt6-qttools-dev
       - hunspell-dev
+      - libglvnd-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - qt6-qttools-dev
+      - vulkan-headers
       #- TODO: voikko for finnish stuf, apsell, hspell
 
 pipeline:

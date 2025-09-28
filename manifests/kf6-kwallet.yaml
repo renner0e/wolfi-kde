@@ -27,6 +27,7 @@ environment:
       - libgcrypt-dev
       - libglvnd-dev
       - libsecret-dev
+      - libx11-dev
       - qca-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev

@@ -12,8 +12,8 @@ environment:
       - build-base
       - busybox
       - extra-cmake-modules
-      - qt6-qtbase-dev
       - kf6-kcodecs-dev
+      - qt6-qtbase-dev
 
 pipeline:
   - uses: git-checkout

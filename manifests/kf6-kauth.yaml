@@ -15,6 +15,7 @@ environment:
       - kf6-kcoreaddons-dev
       - kf6-kwindowsystem-dev
       - libglvnd-dev
+      - libx11-dev
       - polkit-qt-1-dev
       - qt6-qtbase-dev
       - qt6-qtdeclarative-dev

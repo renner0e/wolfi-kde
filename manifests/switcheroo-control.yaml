@@ -12,7 +12,6 @@ environment:
       - build-base
       - busybox
       - glib-dev
-      - cmake
       - libgudev-dev
       - libdrm-dev
       - python3-dev
