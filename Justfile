@@ -181,7 +181,7 @@ deps2:
   just build libaccounts-qt
   just build signond
 
-  just build libproxy
+  #just build libproxy
 
 kf:
   just kf-t1
