@@ -240,7 +240,6 @@ kf-t2:
 
 kf-t3:
   just build kf6-kconfigwidgets
-  just build kf6-kded
   just build kf6-kdesu
   just build kf6-kiconthemes
   just build kf6-kjobwidgets
@@ -251,6 +250,7 @@ kf-t3:
   just build kf6-qqc2-desktop-style
 
 kf-t4:
+  just build kf6-kded
   just build kf6-kio
   just build kf6-frameworkintegration
   just build kf6-baloo
