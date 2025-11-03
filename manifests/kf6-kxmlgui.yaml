@@ -1,6 +1,6 @@
 package:
   name: kf6-kxmlgui
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KXMLGUI
   copyright:
@@ -33,7 +33,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: fec4b97a608a74fac7e527a31694c0a2bb587555
+      expected-commit: 336c501ff08d02d616bf53102542fed1e2d35fbc
       repository: https://invent.kde.org/frameworks/kxmlgui
       tag: v${{package.version}}
 

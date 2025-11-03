@@ -1,6 +1,6 @@
 package:
   name: kf6-kcoreaddons
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KCoreAddons
   copyright:
@@ -22,7 +22,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 8d0bda07610e60e8cbdf61ea79b9e09978f44555
+      expected-commit: 3618917edde2d200a6b34f099be151d21e1103f9
       repository: https://invent.kde.org/frameworks/kcoreaddons
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: kf6-kdoctools
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KDocTools
   copyright:
@@ -31,7 +31,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 659e0116f754b00466c75a72477eb6c82ec7280f
+      expected-commit: f4e933d0c056b0e915f251d1cfbb5abf50edba60
       repository: https://invent.kde.org/frameworks/kdoctools
       tag: v${{package.version}}
 

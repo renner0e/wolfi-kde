@@ -1,6 +1,6 @@
 package:
   name: kf6-kparts
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KParts
   copyright:
@@ -38,7 +38,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 845b9bc6c3cbbd7fa6f01fd78e5733c92b262d94
+      expected-commit: d38d8f0945149143269248aa6b4f5bd37d7a5cc9
       repository: https://invent.kde.org/frameworks/kparts
       tag: v${{package.version}}
 

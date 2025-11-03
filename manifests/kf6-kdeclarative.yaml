@@ -1,6 +1,6 @@
 package:
   name: kf6-kdeclarative
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KDeclarative
   copyright:
@@ -27,7 +27,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 8b2dcf76e3f56bf5ea5cfaae83afa494bbad29af
+      expected-commit: 78e85609ed63d274c6bc220a0ef6375643fcaa08
       repository: https://invent.kde.org/frameworks/kdeclarative
       tag: v${{package.version}}
 

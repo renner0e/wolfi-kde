@@ -1,6 +1,6 @@
 package:
   name: kf6-prison
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: prison is a barcode api currently offering a nice Qt api to produce QRCode barcodes and DataMatrix barcodes, and can easily be made support more.
   copyright:
@@ -24,7 +24,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 086f24bf50e97f809179ede1e598d36d6fcb20fe
+      expected-commit: 09be4e8f511ee58d59a01c736bceb7378a84767e
       repository: https://invent.kde.org/frameworks/prison
       tag: v${{package.version}}
 

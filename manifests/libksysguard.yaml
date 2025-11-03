@@ -1,6 +1,6 @@
 package:
   name: libksysguard
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: Library to retrieve information on the current status of computer hardware
   copyright:
@@ -35,7 +35,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: dd1afa229dcef0934615b31072e28715795dd87c
+      expected-commit: 3ce121f6e2cb96edba786cd9a3d54c548d9cbb35
       repository: https://invent.kde.org/plasma/libksysguard
       tag: v${{package.version}}
 

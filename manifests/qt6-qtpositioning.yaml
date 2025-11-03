@@ -1,6 +1,6 @@
 package:
   name: qt6-qtpositioning
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtlocation
   copyright:
@@ -27,7 +27,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtpositioning
       tag: v${{vars.mangled-package-version}}
-      expected-commit: ece64d7d9e210ed16677963238b648adf3ac6850
+      expected-commit: cded370ab2518be232ae412e3bb8bc7ff8423be2
 
   - uses: qt6/configure
 

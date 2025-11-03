@@ -1,6 +1,6 @@
 package:
   name: kf6-kauth
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KAuth
   copyright:
@@ -26,7 +26,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 2befeb2c28b55857e8a8d424e169c9feede5ccb2
+      expected-commit: af27e1516c5e619744cc9e5ab5353fc874a61719
       repository: https://invent.kde.org/frameworks/kauth
       tag: v${{package.version}}
 

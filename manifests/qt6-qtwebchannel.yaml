@@ -1,6 +1,6 @@
 package:
   name: qt6-qtwebchannel
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtwebchannel
   copyright:
@@ -28,7 +28,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtwebchannel
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 526bfacd1e9c53d902040ffd6ba922d235c000d7
+      expected-commit: 5fa346005c6a0aa6ae4cd1c65947424c29bcdeef
 
   - uses: qt6/configure
 

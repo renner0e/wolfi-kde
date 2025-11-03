@@ -1,6 +1,6 @@
 package:
   name: plasma-workspace
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: 
   copyright:
@@ -120,7 +120,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: caf082bef34b164a8fb577f9b63dc1fbf02cc541
+      expected-commit: 1e8320a9169d923ca71668bc1db0ca0fc3f791ba
       repository: https://invent.kde.org/plasma/plasma-workspace
       tag: v${{package.version}}
 

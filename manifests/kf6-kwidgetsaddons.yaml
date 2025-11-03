@@ -1,6 +1,6 @@
 package:
   name: kf6-kwidgetsaddons
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KWidgetsAddons
   copyright:
@@ -21,7 +21,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: a755cffa7f629abee2d9ba9cd19ac0c035a6e69f
+      expected-commit: 435da418d86912823de864942a6c2ae4d0495055
       repository: https://invent.kde.org/frameworks/kwidgetsaddons
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: qt6-qtcharts
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtcharts
   copyright:
@@ -28,7 +28,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtcharts
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 14955ec8ffc08db4e18afb0baf72d1e4e0f7e6ed
+      expected-commit: a8e93cce32cb2b7c26e91d1bfdeccc1c5c7f7cdb
 
   - uses: qt6/configure
 

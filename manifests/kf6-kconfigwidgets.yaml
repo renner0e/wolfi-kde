@@ -1,6 +1,6 @@
 package:
   name: kf6-kconfigwidgets
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Widgets for KConfig
   copyright:
@@ -30,7 +30,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 1d9780fb412de24969878d758ed5e10e95d8f721
+      expected-commit: 44c8db44eee9e9222447c25f267a59ee48db83d7
       repository: https://invent.kde.org/frameworks/kconfigwidgets
       tag: v${{package.version}}
 

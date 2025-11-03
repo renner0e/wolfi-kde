@@ -1,6 +1,6 @@
 package:
   name: kf6-qqc2-desktop-style
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Qt Quick Controls 2 Desktop Style
   copyright:
@@ -27,11 +27,10 @@ environment:
       - qt6-qttools-dev
       - vulkan-headers
 
-
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: d7f477a3fd1d98477c900daf3153f938059a16be
+      expected-commit: 9703e262f12806ae134f66d2dec51115ef571400
       repository: https://invent.kde.org/frameworks/qqc2-desktop-style
       tag: v${{package.version}}
 

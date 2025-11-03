@@ -1,6 +1,6 @@
 package:
   name: qt6-qtsvg
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtsvg
   copyright:
@@ -26,7 +26,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtsvg
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 56928697e4c41050962d8b0966b7537c71497dfc
+      expected-commit: ad1cee1d8cf7ab05dc779306668ef16fa600faed
 
   - uses: qt6/configure
 

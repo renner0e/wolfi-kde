@@ -1,6 +1,6 @@
 package:
   name: kf6-ki18n
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Ki18n
   copyright:
@@ -27,7 +27,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 32c3811dd8360dca9ae17cc0d72a6d437d6e583f
+      expected-commit: e1eba09d225e045b9920a965ad385549c87c2fe4
       repository: https://invent.kde.org/frameworks/ki18n
       tag: v${{package.version}}
 

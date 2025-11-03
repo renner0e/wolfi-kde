@@ -1,6 +1,6 @@
 package:
   name: kf6-kjobwidgets
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KJobWidgets
   copyright:
@@ -26,7 +26,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 9371a7f9104fdcea31dc6f7d7e6616481d785b81
+      expected-commit: 96ca3fccc52782dfaf5b2ef57b9aac96c9347e48
       repository: https://invent.kde.org/frameworks/kjobwidgets
       tag: v${{package.version}}
 

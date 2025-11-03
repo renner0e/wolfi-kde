@@ -1,6 +1,6 @@
 package:
   name: kf6-solid
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Solid
   copyright:
@@ -28,7 +28,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 478a6bf6690c5af6139bcb1c6c303cf1d09a14b5
+      expected-commit: ce9b79afe7850cec55a583702b00f9be80f32c34
       repository: https://invent.kde.org/frameworks/solid
       tag: v${{package.version}}
 

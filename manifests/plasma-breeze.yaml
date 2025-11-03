@@ -1,6 +1,6 @@
 package:
   name: plasma-breeze
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: Artwork, styles and assets for the Breeze visual style for the Plasma Desktop
   copyright:
@@ -36,7 +36,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 67f5908aae7fb59267a7ad3d64c912aeb3dac91e
+      expected-commit: 8a7a664371c7994481348b80f4f8e3fa50ff54c9
       repository: https://invent.kde.org/plasma/breeze
       tag: v${{package.version}}
 

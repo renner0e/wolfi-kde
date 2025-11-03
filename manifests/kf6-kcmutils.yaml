@@ -1,6 +1,6 @@
 package:
   name: kf6-kcmutils
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Utilities for interacting with KCModules
   copyright:
@@ -38,7 +38,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: f793f437015bac8adafc050784a4f2de65077efe
+      expected-commit: 71d357813890b901d7226894a568306aac5aa4d7
       repository: https://invent.kde.org/frameworks/kcmutils
       tag: v${{package.version}}
 

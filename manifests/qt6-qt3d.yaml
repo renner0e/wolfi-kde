@@ -1,6 +1,6 @@
 package:
   name: qt6-qt3d
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qt3d
   copyright:
@@ -26,7 +26,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qt3d
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 86f4616dd1e0801d0b0a1b656a4648255028890d
+      expected-commit: de888c732f6bea7c573e9e1b6f4a94758d649c11
       recurse-submodules: true
 
     # TODO: system assimp

@@ -280,6 +280,7 @@ kde:
   just build plasma-breeze
   just build kwin
   just build libksysguard
+  just build kio-fuse
   just build plasma-workspace
   just build kaccounts-integration
 

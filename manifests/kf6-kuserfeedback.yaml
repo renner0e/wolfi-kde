@@ -1,6 +1,6 @@
 package:
   name: kf6-kuserfeedback
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Framework for collecting user feedback for apps via telemetry and surveys
   copyright:
@@ -24,7 +24,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: df4a9a923d7e4818ec7a1dd3d3de5660904bbeb9
+      expected-commit: 2067a1de1787bff6a8fe7ebb0850005c16359c6b
       repository: https://invent.kde.org/frameworks/kuserfeedback
       tag: v${{package.version}}
 

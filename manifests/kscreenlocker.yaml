@@ -1,6 +1,6 @@
 package:
   name: kscreenlocker
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: Library and components for secure lock screen architecture
   copyright:
@@ -53,7 +53,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: e21b2666f88cfc7c910f29a73c47d2086ca6ac44
+      expected-commit: cd2ec52a843fe774e79b7ba2fbf521af0da0bf12
       repository: https://invent.kde.org/plasma/kscreenlocker
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: qt6-qt5compat
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qt5compat
   copyright:
@@ -25,8 +25,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qt5compat
       tag: v${{vars.mangled-package-version}}
-      expected-commit: de97b9dc07ecddf29262988e33d195b389415d42
-
+      expected-commit: 2bdf215e94f2c108b89c0665570f0ea33647c8c1
 
   - uses: qt6/configure
 

@@ -1,6 +1,6 @@
 package:
   name: plasma-activities-stats
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: A library for accessing the usage data collected by the activities system.
   copyright:
@@ -23,7 +23,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 368ea8bc7359f9d125acebaaab6327d13b96fa71
+      expected-commit: 639af4eacb959335d989ca61748fcd6ceea62342
       repository: https://invent.kde.org/plasma/plasma-activities-stats
       tag: v${{package.version}}
 

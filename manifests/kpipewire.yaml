@@ -1,6 +1,6 @@
 package:
   name: kpipewire
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: kpipewire
   copyright:
@@ -31,7 +31,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: b3345ff28bc8e8c46b5bf376e98c64ee377f0199
+      expected-commit: af46cf1f423368d3a7e990a97d4116081d3f1f98
       repository: https://invent.kde.org/plasma/kpipewire
       tag: v${{package.version}}
 

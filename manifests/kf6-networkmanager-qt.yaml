@@ -1,6 +1,6 @@
 package:
   name: kf6-networkmanager-qt
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Qt wrapper for NetworkManager API
   copyright:
@@ -23,7 +23,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: fc58d0388141e6fe20e35ed266498591dc2ac51a
+      expected-commit: 644bcb69adaa32e7a9ff07ed2b0e531a84f52ec3
       repository: https://invent.kde.org/frameworks/networkmanager-qt
       tag: v${{package.version}}
 

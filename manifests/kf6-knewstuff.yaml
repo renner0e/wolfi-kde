@@ -1,6 +1,6 @@
 package:
   name: kf6-knewstuff
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KNewStuff
   copyright:
@@ -30,7 +30,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 8c52f23ffa1c2f53c022b4b4225fe6d2d1c3c172
+      expected-commit: 394ff2eaab2ba884a3f6e5a022b2ec04ae704f5c
       repository: https://invent.kde.org/frameworks/knewstuff
       tag: v${{package.version}}
 

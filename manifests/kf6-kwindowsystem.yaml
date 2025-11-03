@@ -1,6 +1,6 @@
 package:
   name: kf6-kwindowsystem
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KWindowSystem
   copyright:
@@ -30,7 +30,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 44052699960a716010064dea91c8f649e94918cc
+      expected-commit: cfc5d26a4f933fd2a3e5f347e09694f9bcd3b848
       repository: https://invent.kde.org/frameworks/kwindowsystem
       tag: v${{package.version}}
 

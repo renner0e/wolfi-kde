@@ -1,6 +1,6 @@
 package:
   name: qt6-qtlocation
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtlocation
   copyright:
@@ -30,7 +30,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtlocation
       tag: v${{vars.mangled-package-version}}
-      expected-commit: a9b725be1a853e1c7f2ab6a28c4093c1abf71db2
+      expected-commit: 06051e45b8e7512563fa609df61861fe3de15058
 
   - uses: qt6/configure
 

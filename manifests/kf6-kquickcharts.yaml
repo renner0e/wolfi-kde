@@ -1,6 +1,6 @@
 package:
   name: kf6-kquickcharts
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: A QtQuick plugin providing high-performance charts.
   copyright:
@@ -22,7 +22,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 9c9a322cd035d85d2da74159c3f4eda8a2ab1511
+      expected-commit: f9b391f9d583230911c741b508c95a10f5a00e7b
       repository: https://invent.kde.org/frameworks/kquickcharts
       tag: v${{package.version}}
 

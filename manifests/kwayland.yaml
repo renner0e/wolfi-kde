@@ -1,6 +1,6 @@
 package:
   name: kwayland
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: KWayland provides a Qt-style Client and Server library wrapper for the Wayland libraries.
   copyright:
@@ -26,7 +26,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: a7f4f4428c4379ddbba7df977907b89c7ca7ed57
+      expected-commit: 1878e9aed0779400cb0d46374beb51331e3f587e
       repository: https://invent.kde.org/plasma/kwayland
       tag: v${{package.version}}
 

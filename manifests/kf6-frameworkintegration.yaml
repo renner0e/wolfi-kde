@@ -1,6 +1,6 @@
 package:
   name: kf6-frameworkintegration
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Framework Integration is a set of plugins responsible for better integration of Qt applications when running on a KDE Plasma workspace.
   copyright:
@@ -31,7 +31,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: b6748192a2dd2d031f1f4d298ccb2a566dc55c2b
+      expected-commit: 48dd1573b1a539f5cafa6655baa075d96fc1c949
       repository: https://invent.kde.org/frameworks/frameworkintegration
       tag: v${{package.version}}
 

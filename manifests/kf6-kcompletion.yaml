@@ -1,6 +1,6 @@
 package:
   name: kf6-kcompletion
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KCompletion
   copyright:
@@ -25,7 +25,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: f5df46c4d610d4ebf07471d2f7bac463312d26ac
+      expected-commit: bcfd5c573494f259ab10dfa0ea1bb374c60fc920
       repository: https://invent.kde.org/frameworks/kcompletion
       tag: v${{package.version}}
 

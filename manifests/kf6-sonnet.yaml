@@ -1,6 +1,6 @@
 package:
   name: kf6-sonnet
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: 
   copyright:
@@ -23,7 +23,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: d711f6604fd881b46ca4b50568104683b457a22a
+      expected-commit: 358dd11dc809f51167404bfc4803378995cec4d1
       repository: https://invent.kde.org/frameworks/sonnet
       tag: v${{package.version}}
 

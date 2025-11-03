@@ -1,6 +1,6 @@
 package:
   name: kf6-syndication
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Syndication Library
   copyright:
@@ -18,7 +18,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 8bc05c864607dd09c6abf560520a009b54fffa11
+      expected-commit: 428addb1de4a4295b8c220b0a827edf486ce7463
       repository: https://invent.kde.org/frameworks/syndication
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: kf6-ktexteditor
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KTextEditor Framework
   copyright:
@@ -46,7 +46,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 1e516f2ca15c507a9854fb7515adaf8689af363e
+      expected-commit: f1248160ffbceb882ce7ee79e0f8ba156f8401f4
       repository: https://invent.kde.org/frameworks/ktexteditor
       tag: v${{package.version}}
 

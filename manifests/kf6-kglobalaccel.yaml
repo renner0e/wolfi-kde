@@ -1,6 +1,6 @@
 package:
   name: kf6-kglobalaccel
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KGlobalAccel
   copyright:
@@ -22,7 +22,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 6b496189f535c6397a348101fe7593fb810f5ab9
+      expected-commit: f9cd92205a4f9db16bd13aeb8c66b4d2a48365cb
       repository: https://invent.kde.org/frameworks/kglobalaccel
       tag: v${{package.version}}
 

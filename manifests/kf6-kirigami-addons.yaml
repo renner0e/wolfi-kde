@@ -1,6 +1,6 @@
 package:
   name: kf6-kirigami-addons
-  version: "1.9.0"
+  version: "1.10.0"
   epoch: 0
   description: Add-ons for the Kirigami framework
   copyright:
@@ -28,7 +28,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: d53b2b24608ae66dbaa4f09d8d7ebae6c9f642b5
+      expected-commit: aa5b65fa50d7b88a5a828b562cf770b3dcc4db7f
       repository: https://invent.kde.org/libraries/kirigami-addons
       tag: v${{package.version}}
 

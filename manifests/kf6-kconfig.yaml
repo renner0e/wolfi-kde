@@ -1,6 +1,6 @@
 package:
   name: kf6-kconfig
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KConfig
   copyright:
@@ -22,7 +22,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 4a6b3e56cd9f74598d9209a9d7ad0834d5e38b9d
+      expected-commit: 5e70648eaf4a2d0c6209c1636a3009083779a961
       repository: https://invent.kde.org/frameworks/kconfig
       tag: v${{package.version}}
 

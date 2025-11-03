@@ -1,6 +1,6 @@
 package:
   name: kf6-ktextwidgets
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KTextEditor Framework
   copyright:
@@ -32,7 +32,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 50de12e6fc9e94b17d98959bba0d40b756b1e2b3
+      expected-commit: 806033b5b2031268098bfb4f89a4bcfd6c4f1e68
       repository: https://invent.kde.org/frameworks/ktextwidgets
       tag: v${{package.version}}
 

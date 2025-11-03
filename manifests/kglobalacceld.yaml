@@ -1,6 +1,6 @@
 package:
   name: kglobalacceld
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: Daemon providing Global Keyboard Shortcut (Accelerator) functionality
   copyright:
@@ -35,7 +35,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 0e67c8a924e4e3bb8f90e0d1f29bd4ed54c1ccc7
+      expected-commit: 440ab0cedf1800af54403b83761a9ff239273117
       repository: https://invent.kde.org/plasma/kglobalacceld
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: kf6-knotifications
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KNotifications
   copyright:
@@ -25,7 +25,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 3b3db2b85178a5de68fac58a5b0ed1b88d83d414
+      expected-commit: 8f2855bed0646d63dd9dfef68406f991ff856669
       repository: https://invent.kde.org/frameworks/knotifications
       tag: v${{package.version}}
 

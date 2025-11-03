@@ -1,6 +1,6 @@
 package:
   name: knighttime
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: Helpers for scheduling the dark-light cycle
   copyright:
@@ -30,7 +30,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 587994c4951133ce678893dd5e78c813f41cd677
+      expected-commit: e940693f1c9128b5f007edaedc49b44ddf8e551c
       repository: https://invent.kde.org/plasma/knighttime
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: kf6-baloo
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Framework for searching and managing metadata.
   copyright:
@@ -40,7 +40,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: cf4d41c8e2bd3f168541f87e3756b8f38bcedcc1
+      expected-commit: 15d41f8f6b47de5ea834e1b9d92f55f6e86cc5ed
       repository: https://invent.kde.org/frameworks/baloo
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: kscreen
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: KDE's screen management software
   copyright:
@@ -50,7 +50,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 6df60044e4a68a9c7ae18244f19045da73ec74ea
+      expected-commit: 1d5849d3b51e97c3dc8ea3756b59a6aff24f5842
       repository: https://invent.kde.org/plasma/kscreen
       tag: v${{package.version}}
 

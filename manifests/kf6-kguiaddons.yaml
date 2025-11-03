@@ -1,6 +1,6 @@
 package:
   name: kf6-kguiaddons
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KGuiAddons
   copyright:
@@ -25,7 +25,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 719d16f877f1a5ea7c9806eebf275bff130e7182
+      expected-commit: a555febd69c3243649914342d643b1c1fc571cf9
       repository: https://invent.kde.org/frameworks/kguiaddons
       tag: v${{package.version}}
 

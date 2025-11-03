@@ -1,6 +1,6 @@
 package:
   name: kf6-kunitconversion
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KUnitConversion
   copyright:
@@ -18,7 +18,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 
+      expected-commit: 494761df4aaf449f04f7ef3c0d39e1177d458b68
       repository: https://invent.kde.org/frameworks/kunitconversion
       tag: v${{package.version}}
 

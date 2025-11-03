@@ -1,6 +1,6 @@
 package:
   name: qt6-qtmultimedia
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtmultimedia
   copyright:
@@ -30,7 +30,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtmultimedia
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 36207ed2b30cbe4e3397dfa488c4267f633de58a
+      expected-commit: 9f1cc9b35c0916084f6835f78b665a3b4e3fe4f9
 
   - uses: qt6/configure
 

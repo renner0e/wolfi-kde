@@ -1,6 +1,6 @@
 package:
   name: kf6-kdbusaddons
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KDBusAddons
   copyright:
@@ -22,7 +22,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 9a6bcbe55b729c06634a3b2df4c6595389abdc6a
+      expected-commit: 98089d3869836379651c40d21481b2f3bec7d277
       repository: https://invent.kde.org/frameworks/kdbusaddons
       tag: v${{package.version}}
 

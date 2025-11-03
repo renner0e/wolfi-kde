@@ -1,6 +1,6 @@
 package:
   name: plasma5support
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: Support components for porting from KF5/Qt5 to KF6/Qt6
   copyright:
@@ -44,7 +44,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: d20f4c609842f61bd101f5651de38bb6e08e14c0
+      expected-commit: dca787c37a789a60dfbfbc8232f898a9df719628
       repository: https://invent.kde.org/plasma/plasma5support
       tag: v${{package.version}}
 

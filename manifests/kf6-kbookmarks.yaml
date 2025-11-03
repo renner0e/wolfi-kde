@@ -1,6 +1,6 @@
 package:
   name: kf6-kbookmarks
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KBookmarks
   copyright:
@@ -24,7 +24,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: a5b02fd2a59e2aaa19df4f78fee993f4adf139bb
+      expected-commit: 006c1aa5e52a06b8a2c62413273838fe0ad6bc8f
       repository: https://invent.kde.org/frameworks/kbookmarks
       tag: v${{package.version}}
 

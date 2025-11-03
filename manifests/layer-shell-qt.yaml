@@ -1,6 +1,6 @@
 package:
   name: layer-shell-qt
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: Qt component to allow applications to make use of the Wayland wl-layer-shell protocol.
   copyright:
@@ -24,7 +24,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: ebd64dd395aa91eef21716b9840a2fd72a6b246f
+      expected-commit: 62864d136c84bb9a1d2868262b5d744c79f3c78b
       repository: https://invent.kde.org/plasma/layer-shell-qt
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: kf6-kidletime
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KIdleTime
   copyright:
@@ -23,7 +23,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 84bff4abd55f2a9285be29a77a5654e3678fb56b
+      expected-commit: d3cdda7f8e30d29346dcbd739cda1cecb551232a
       repository: https://invent.kde.org/frameworks/kidletime
       tag: v${{package.version}}
 

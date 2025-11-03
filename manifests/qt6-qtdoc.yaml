@@ -1,6 +1,6 @@
 package:
   name: qt6-qtdoc
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtdoc
   copyright:
@@ -25,7 +25,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtdoc
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 924db889cae31287a1edae2813f125d89c8e0cf3
+      expected-commit: 4c088d092ade87dd27550bdfde5548535e9c7cca
 
   - uses: qt6/configure
 

@@ -1,6 +1,6 @@
 package:
   name: kf6-kdesu
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KDE Su
   copyright:
@@ -25,7 +25,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: a2e11795257291e7ee84859779e3cf3f5429f8b5
+      expected-commit: 8e0c5fd5055a19f74b0dd211e3ff0c1244615382
       repository: https://invent.kde.org/frameworks/kdesu
       tag: v${{package.version}}
 

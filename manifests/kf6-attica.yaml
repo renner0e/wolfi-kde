@@ -1,6 +1,6 @@
 package:
   name: kf6-attica
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Attica is a Qt library that implements the Open Collaboration Services API.
   copyright:
@@ -19,7 +19,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 419dcdf17eb48f8f2b8c1a44dc67606fe4d8c6e4
+      expected-commit: a26cea1d0ccf0e48462237ab577373e8011cb962
       repository: https://invent.kde.org/frameworks/attica
       tag: v${{package.version}}
 

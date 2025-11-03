@@ -1,6 +1,6 @@
 package:
   name: kf6-kfilemetadata
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: A library for extracting file metadata
   copyright:
@@ -34,7 +34,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 22cbc5332ebddc5414aff0de93791806ff1c1af3
+      expected-commit: 6fe747b758f989d5fb5e0428c4d03b5c808cb00d
       repository: https://invent.kde.org/frameworks/kfilemetadata
       tag: v${{package.version}}
 

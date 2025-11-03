@@ -1,6 +1,6 @@
 package:
   name: libkexiv2-qt
-  version: "25.08.1"
+  version: "25.08.2"
   epoch: 0
   description: Wrapper around Exiv2 library to manipulate picture metadata as EXIF and XMP
   copyright:

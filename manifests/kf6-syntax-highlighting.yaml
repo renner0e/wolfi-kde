@@ -1,6 +1,6 @@
 package:
   name: kf6-syntax-highlighting
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Syntax highlighting Engine for Structured Text and Code.
   copyright:
@@ -23,7 +23,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: f39b8f4054efa48389765d82081854053d8cfd91
+      expected-commit: a5fcb973aef44c9e5494dacfabd76a0ad5556961
       repository: https://invent.kde.org/frameworks/syntax-highlighting
       tag: v${{package.version}}
 

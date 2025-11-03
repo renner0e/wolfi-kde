@@ -1,6 +1,6 @@
 package:
   name: qt6-qtnetworkauth
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtnetworkauth
   copyright:
@@ -25,7 +25,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtnetworkauth
       tag: v${{vars.mangled-package-version}}
-      expected-commit: ed02dfd0363a5739aeb1ff341b946aaed56fb6fb
+      expected-commit: ff34e1ae68601b3437a7fd6eef412894b08dd0c0
 
   - uses: qt6/configure
 

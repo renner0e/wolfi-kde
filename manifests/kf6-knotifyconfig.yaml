@@ -1,6 +1,6 @@
 package:
   name: kf6-knotifyconfig
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KNotifyConfig
   copyright:
@@ -41,7 +41,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 5ad603172c08de9453c5d6f61ec70c72dedff2fe
+      expected-commit: f11be06aa34b7c2987319c90691e856d857fdce3
       repository: https://invent.kde.org/frameworks/knotifyconfig
       tag: v${{package.version}}
 

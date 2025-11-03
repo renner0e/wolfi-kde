@@ -1,6 +1,6 @@
 package:
   name: kf6-kwallet
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: "KWallet: Credential Storage"
   copyright:
@@ -36,7 +36,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 9faf55040dfae42e2f56dd15528b72ddf83bb0c1
+      expected-commit: 1b94cc1432a62e51819e2382f210d19f7bc68941
       repository: https://invent.kde.org/frameworks/kwallet
       tag: v${{package.version}}
 

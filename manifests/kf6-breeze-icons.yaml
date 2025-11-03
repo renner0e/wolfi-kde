@@ -1,6 +1,6 @@
 package:
   name: kf6-breeze-icons
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Breeze icon theme.
   copyright:
@@ -25,7 +25,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 640296c15419dddf9bbb5582f0c3019b7cc864aa
+      expected-commit: 571fb3033cef8bca51993f03e07fdb55544fcaa9
       repository: https://invent.kde.org/frameworks/breeze-icons
       tag: v${{package.version}}
 

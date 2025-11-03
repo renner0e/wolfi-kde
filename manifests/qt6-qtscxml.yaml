@@ -1,6 +1,6 @@
 package:
   name: qt6-qtscxml
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtscxml
   copyright:
@@ -28,7 +28,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtscxml
       tag: v${{vars.mangled-package-version}}
-      expected-commit: dc7bdbd8a767e1c6cd5b1ae8ef6a15c4c37b2a2a
+      expected-commit: 4d8a8fa98dba2370c424c8a16282e812bef27dbc
 
   - uses: qt6/configure
 

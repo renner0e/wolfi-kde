@@ -1,6 +1,6 @@
 package:
   name: kf6-kstatusnotifieritem
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Implementation of Status Notifier Items
   copyright:
@@ -24,7 +24,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 001ab412c3088905ee33803e1e79609e73709b6d
+      expected-commit: 3c4cd41dbf7194ca960f8a92e583fbb440247b58
       repository: https://invent.kde.org/frameworks/kstatusnotifieritem
       tag: v${{package.version}}
 

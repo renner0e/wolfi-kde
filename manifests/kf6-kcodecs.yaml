@@ -1,6 +1,6 @@
 package:
   name: kf6-kcodecs
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KCodecs provide a collection of methods to manipulate strings using various encodings
   copyright:
@@ -18,7 +18,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 01fb7151df42e5b0fdf436cf3344aa66036a8cd6
+      expected-commit: d084a039e9e0b5bc269cc1dd30d588297d3f5885
       repository: https://invent.kde.org/frameworks/kcodecs
       tag: v${{package.version}}
 

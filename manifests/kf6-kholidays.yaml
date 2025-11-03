@@ -1,6 +1,6 @@
 package:
   name: kf6-kholidays
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Library to assist determining when holidays occur
   copyright:
@@ -21,7 +21,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: ccad8e275d2246beae8a449be3d6e115d9718f7d
+      expected-commit: 19c9976dec63d22874643319b49feeec071c04a2
       repository: https://invent.kde.org/frameworks/kholidays
       tag: v${{package.version}}
 

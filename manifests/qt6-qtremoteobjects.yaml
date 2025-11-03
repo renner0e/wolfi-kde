@@ -1,6 +1,6 @@
 package:
   name: qt6-qtremoteobjects
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtremoteobjects
   copyright:
@@ -28,7 +28,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtremoteobjects
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 6e5eafb607b7cab278cae8b0b47a7c2a553623ef
+      expected-commit: c200d8c5b3de18ea1497066f74f56fdf7cd42396
 
   - uses: qt6/configure
 

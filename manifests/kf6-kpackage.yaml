@@ -1,6 +1,6 @@
 package:
   name: kf6-kpackage
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: This framework lets applications manage user installable packages of non-binary assets
   copyright:
@@ -21,7 +21,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: a30f9014184b38cb4763447dfc6aff80c5845dbd
+      expected-commit: c334c865bf36cae03c0dc716e1e3308e81d415a3
       repository: https://invent.kde.org/frameworks/kpackage
       tag: v${{package.version}}
 

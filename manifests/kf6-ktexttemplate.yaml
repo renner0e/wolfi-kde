@@ -1,6 +1,6 @@
 package:
   name: kf6-ktexttemplate
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Library to allow application developers to separate the structure of documents from the data they contain.
   copyright:
@@ -24,7 +24,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: c7848ad6089417dc426988f1dbdb2f9f31f4a21d
+      expected-commit: 3cc6c96df3da9302693c5ce0804097c01017bae9
       repository: https://invent.kde.org/frameworks/ktexttemplate
       tag: v${{package.version}}
 

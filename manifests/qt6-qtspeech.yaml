@@ -1,6 +1,6 @@
 package:
   name: qt6-qtspeech
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtspeech
   copyright:
@@ -29,8 +29,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtspeech
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 293dc229f2cd86b16fc486e4253725a943cadf83
-
+      expected-commit: 16bc9d9b74145b17e68529ca872a81f5b8a679d5
 
   - uses: qt6/configure
 

@@ -1,6 +1,6 @@
 package:
   name: kwin
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: KDE Wayland Compositor
   copyright:
@@ -78,7 +78,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 67917b995e27148c71202e268450be1e2a6d3d60
+      expected-commit: 460e9b33f4ae624ad93f8cd76760cc0f9dc279ca
       repository: https://invent.kde.org/plasma/kwin
       tag: v${{package.version}}
 

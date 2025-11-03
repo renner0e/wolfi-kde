@@ -1,6 +1,6 @@
 package:
   name: kf6-kcolorscheme
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Classes to read and interact with KColorScheme
   copyright:
@@ -24,7 +24,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: ba3ccfcd1b049e7b6a078765e5ef76803dde2afb
+      expected-commit: a7e9fa50d61a55a55c6672532b8f3538387a2947
       repository: https://invent.kde.org/frameworks/kcolorscheme
       tag: v${{package.version}}
 

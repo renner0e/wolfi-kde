@@ -1,6 +1,6 @@
 package:
   name: kf6-krunner
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Framework for providing different actions given a string query.
   copyright:
@@ -26,7 +26,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 53f571802462a69ef81133b4ebdcae888c5b0192
+      expected-commit: 3807cdba94e3c9bc267c33f299e08876e49c76c9
       repository: https://invent.kde.org/frameworks/krunner
       tag: v${{package.version}}
 

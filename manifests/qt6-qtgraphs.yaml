@@ -1,6 +1,6 @@
 package:
   name: qt6-qtgraphs
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtgraphs
   copyright:
@@ -27,7 +27,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtgraphs
       tag: v${{vars.mangled-package-version}}
-      expected-commit: c8d0f9bf9cedea533abaaa6fc35c360bce76c90e
+      expected-commit: 4e18609678b777f7e7ce47c17764e46c20bfb608
 
   - uses: qt6/configure
 

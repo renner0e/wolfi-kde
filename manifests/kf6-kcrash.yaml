@@ -1,6 +1,6 @@
 package:
   name: kf6-kcrash
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KCrash
   copyright:
@@ -21,7 +21,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: a29ed2967c78103140daaaecd3950ff3fb8ddf59
+      expected-commit: 7767e60211a7347773da23887f00f4102623b953
       repository: https://invent.kde.org/frameworks/kcrash
       tag: v${{package.version}}
 

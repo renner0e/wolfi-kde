@@ -1,6 +1,6 @@
 package:
   name: plasma-activities
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: Core components for the KDE's Activities System
   copyright:
@@ -25,7 +25,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 4dd19c056a35e5f89d34d2046aca08c908500e25
+      expected-commit: a92c2c67e047118b4c8107c5b46c0d7fda76c28f
       repository: https://invent.kde.org/plasma/plasma-activities
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: kf6-kiconthemes
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KIconThemes
   copyright:
@@ -30,7 +30,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: dd9f0222ac453c6b77fcea369b68649ac5eba633
+      expected-commit: 9f12a33a28fc9ade3094d739c575800da38692ec
       repository: https://invent.kde.org/frameworks/kiconthemes
       tag: v${{package.version}}
 

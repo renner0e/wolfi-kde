@@ -1,6 +1,6 @@
 package:
   name: kdecoration
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: Plugin-based library to create window decorations
   copyright:
@@ -21,7 +21,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: febdb3cfac371ae4b4e6823e72a6b716971d436a
+      expected-commit: 4e9b81179f61bc1cc3e389df4b867b45bfa49b55
       repository: https://invent.kde.org/plasma/kdecoration
       tag: v${{package.version}}
 

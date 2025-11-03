@@ -1,6 +1,6 @@
 package:
   name: qt6-qtimageformats
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtimageformats
   copyright:
@@ -27,7 +27,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtimageformats
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 934200d923db28f41f0f05e5cd72e311db768852
+      expected-commit: 3e83e4452a3437f95b9fb6c72bf6b69407c1a592
 
   - uses: qt6/configure
 

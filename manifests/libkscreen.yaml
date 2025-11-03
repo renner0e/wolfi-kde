@@ -1,6 +1,6 @@
 package:
   name: libkscreen
-  version: "6.4.90"
+  version: "6.5.1"
   epoch: 0
   description: KDE's screen management software
   copyright:
@@ -27,7 +27,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 21c96a3c7c8009923792986f2c9467e6b2d6b3c1
+      expected-commit: 5983bd5fed0a4bf2238cc903148a949fa5715120
       repository: https://invent.kde.org/plasma/libkscreen
       tag: v${{package.version}}
 

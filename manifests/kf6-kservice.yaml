@@ -1,6 +1,6 @@
 package:
   name: kf6-kservice
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KService
   copyright:
@@ -22,8 +22,8 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 86558c46e2cfba2535b7bf72822dce45f7eb7be5
-      repository: https://invent.kde.org/frameworks/KService
+      expected-commit: e189eba9ad65059070f0377783c6c505710e9192
+      repository: https://invent.kde.org/frameworks/kservice
       tag: v${{package.version}}
 
   - uses: cmake/configure

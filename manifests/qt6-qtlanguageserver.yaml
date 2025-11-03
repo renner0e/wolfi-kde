@@ -1,6 +1,6 @@
 package:
   name: qt6-qtlanguageserver
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qtlanguageserver
   copyright:
@@ -25,7 +25,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtlanguageserver
       tag: v${{vars.mangled-package-version}}
-      expected-commit: 59a494c090bd7865c4fd940d9b888d291c6e74e9
+      expected-commit: e4de04e86255802a0862c0b4694eac0065f6c73e
 
   - uses: qt6/configure
 

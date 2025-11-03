@@ -1,6 +1,6 @@
 package:
   name: kaccounts-integration
-  version: "25.08.1"
+  version: "25.08.2"
   epoch: 0
   description: Online account management system and its Plasma integration components
   copyright:
@@ -53,7 +53,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 406b46890f29eac316281b8f56849cfd23a2501e
+      expected-commit: d96d82c7a9409861af08a523e81d79b5c5071096
       repository: https://invent.kde.org/network/kaccounts-integration
       tag: v${{package.version}}
 

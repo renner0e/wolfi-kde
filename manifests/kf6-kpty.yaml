@@ -1,6 +1,6 @@
 package:
   name: kf6-kpty
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KPty
   copyright:
@@ -20,7 +20,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: dd8d23a3c06c7310ec637f60dac2fc437cf98848
+      expected-commit: 6a9476dc418ff0e549a64501e6ae7ebafbca3781
       repository: https://invent.kde.org/frameworks/kpty
       tag: v${{package.version}}
 

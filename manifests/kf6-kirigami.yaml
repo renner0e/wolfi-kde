@@ -1,6 +1,6 @@
 package:
   name: kf6-kirigami
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: A QtQuick based components set
   copyright:
@@ -24,7 +24,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: c93b3770d8c980f7eb0c67ca3a2e858d610649b5
+      expected-commit: 73a7ec3985b2d3ef17782ca4d43b8f11c0beaa2b
       repository: https://invent.kde.org/frameworks/kirigami
       tag: v${{package.version}}
 

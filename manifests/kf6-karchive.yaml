@@ -1,6 +1,6 @@
 package:
   name: kf6-karchive
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Qt addon providing access to numerous types of archives
   copyright:
@@ -24,7 +24,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: e54009eecbea39c4c0b8eb540160960183c30702
+      expected-commit: 2c7d73f56ca9f9de12b329745d3bf3009e8bfb70
       repository: https://invent.kde.org/frameworks/karchive
       tag: v${{package.version}}
 

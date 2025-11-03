@@ -1,6 +1,6 @@
 package:
   name: kf6-kio
-  version: "6.18.0"
+  version: "6.19.1"
   epoch: 0
   description: KIO
   copyright:
@@ -50,7 +50,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: de02c24bbd0804817bdd5dfeda3e85c8a1974225
+      expected-commit: e0d7f6a17a46506fc7cebf47cb2e8195fea651f0
       repository: https://invent.kde.org/frameworks/kio
       tag: v${{package.version}}
 

@@ -1,6 +1,6 @@
 package:
   name: kf6-kded
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: KDE Daemon
   copyright:
@@ -26,7 +26,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: 8dac43e9999c9a578660aae378ae68861bb6f2f6
+      expected-commit: f9b52952fba94e89c5162416f91a7e42087cce04
       repository: https://invent.kde.org/frameworks/kded
       tag: v${{package.version}}
 

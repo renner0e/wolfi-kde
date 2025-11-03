@@ -1,6 +1,6 @@
 package:
   name: kf6-ksvg
-  version: "6.18.0"
+  version: "6.19.0"
   epoch: 0
   description: Components for handling SVGs
   copyright:
@@ -27,7 +27,7 @@ environment:
 pipeline:
   - uses: git-checkout
     with:
-      expected-commit: ce18719b2dc94bf23526a8e06581b4dc25e0a2d5
+      expected-commit: dc56f39510e68b916d64530f46dbb296beef95cc
       repository: https://invent.kde.org/frameworks/ksvg
       tag: v${{package.version}}
 

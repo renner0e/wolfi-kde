@@ -1,6 +1,6 @@
 package:
   name: qt6-qtdeclarative
-  version: "6.9.2"
+  version: "6.10.0"
   epoch: 0
   description: qt6-qtdeclarative
   copyright:
@@ -35,7 +35,7 @@ pipeline:
     with:
       repository: https://github.com/qt/qtdeclarative.git
       tag: v${{vars.mangled-package-version}}
-      expected-commit: b653aebb2175203d86199b1d320fd10f939df3fc
+      expected-commit: 7e0ab1d98c159c9f4c9afab78b43e7c70f449e41
 
   - uses: qt6/configure
 
