@@ -266,7 +266,6 @@ kde:
   just build plasma-activities
   just build plasma-activities-stats
   just build kpipewire
-  just build kdecoration
   just build kwayland
   just build plasma5support
   just build kglobalacceld
