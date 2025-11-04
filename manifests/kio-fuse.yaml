@@ -1,0 +1,60 @@
+package:
+  name: kio-fuse
+  version: "5.1.1"
+  epoch: 0
+  description: FUSE Interface for KIO
+  copyright:
+    - license: GPL-3.0-or-later
+
+environment:
+  contents:
+    packages:
+      - build-base
+      - busybox
+      - extra-cmake-modules
+      - fuse3-dev
+      - kf6-kbookmarks-dev
+      - kf6-kcompletion-dev
+      - kf6-kconfig-dev
+      - kf6-kcoreaddons-dev
+      - kf6-kio-dev
+      - kf6-kitemviews-dev
+      - kf6-kjobwidgets-dev
+      - kf6-kservice-dev
+      - kf6-kwidgetsaddons-dev
+      - kf6-kwindowsystem-dev
+      - kf6-solid-dev
+      - libglvnd-dev
+      - libxkbcommon-dev
+      - qt6-qtbase-dev
+      - qt6-qtdeclarative-dev
+      - vulkan-headers
+
+pipeline:
+  - uses: git-checkout
+    with:
+      expected-commit: be7159897e38ea40d7a29628758de639faf8ca27
+      repository: https://invent.kde.org/system/kio-fuse
+      tag: v${{package.version}}
+
+  - uses: cmake/configure
+    with:
+      opts: |
+        -DECM_DIR=/usr/share/ECM/ \
+        -DQT_MAJOR_VERSION=6
+
+  - uses: cmake/build
+
+  - uses: cmake/install
+
+  - uses: strip
+
+update:
+  enabled: true
+  git:
+    strip-prefix: v
+
+test:
+  pipeline:
+    - uses: test/tw/ldd-check
+
